@@ -12,7 +12,7 @@ import { StorageService } from './services/storage/storage.service';
   imports: [CommonModule, RouterOutlet, MaterialModule],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
-  providers: [DataService],
+  // providers: [DataService],
 })
 export class AppComponent implements OnInit {
   title = 'EvoraIT';
@@ -22,6 +22,9 @@ export class AppComponent implements OnInit {
   private storageService = inject(StorageService);
 
   materials: MaterialModel[] = [];
+  // materials = this.dataService.materials;
+
+  constructor() {}
 
   ngOnInit(): void {
     /**

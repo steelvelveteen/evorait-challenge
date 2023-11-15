@@ -11,6 +11,7 @@ const JSONUrl = '/assets/MatPricingSet.json';
 export class DataService {
   private http = inject(HttpClient);
 
+  // private loadMaterials$ = this.http
   loadMaterials$ = this.http
     .get<DataSet>(JSONUrl)
     .pipe(map((data: DataSet) => data.d.PartSet.results));
