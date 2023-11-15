@@ -15,7 +15,7 @@ import { StorageService } from './services/storage/storage.service';
   providers: [DataService],
 })
 export class AppComponent implements OnInit {
-  title = 'evorait-challenge';
+  title = 'EvoraIT';
 
   private router = inject(Router);
   private dataService = inject(DataService);
@@ -36,6 +36,7 @@ export class AppComponent implements OnInit {
   }
 
   goToMaterials = (): void => {
-    this.router.navigate(['']);
+    console.log('Take me there!');
+    this.router.navigate(['materials']);
   };
 }

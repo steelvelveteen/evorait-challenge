@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { MaterialItemComponent } from './material-item.component';
+import { MaterialShellComponent } from './material-shell.component';
 
-describe('MaterialItemComponent', () => {
-  let component: MaterialItemComponent;
-  let fixture: ComponentFixture<MaterialItemComponent>;
+describe('MaterialShellComponent', () => {
+  let component: MaterialShellComponent;
+  let fixture: ComponentFixture<MaterialShellComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [MaterialItemComponent]
+      imports: [MaterialShellComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(MaterialItemComponent);
+    fixture = TestBed.createComponent(MaterialShellComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
