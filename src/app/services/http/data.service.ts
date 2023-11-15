@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-import { Observable } from 'rxjs';
-import { DataSet, MaterialPricingSet } from '../../domain/material.interface';
-
+import { map } from 'rxjs';
+import { DataSet, MaterialModel } from '../../domain/material.interface';
+import { toSignal } from '@angular/core/rxjs-interop';
 const JSONUrl = '/assets/MatPricingSet.json';
 
 @Injectable({
@@ -11,7 +11,12 @@ const JSONUrl = '/assets/MatPricingSet.json';
 export class DataService {
   private http = inject(HttpClient);
 
-  constructor() {}
+  loadMaterials$ = this.http
+    .get<DataSet>(JSONUrl)
+    .pipe(map((data: DataSet) => data.d.PartSet.results));
 
-  loadJsonDataSet = (): Observable<DataSet> => this.http.get<DataSet>(JSONUrl);
+  // Somehow signals are still buggy?
+  materials = toSignal<MaterialModel[], MaterialModel[]>(this.loadMaterials$, {
+    initialValue: [] as MaterialModel[],
+  });
 }

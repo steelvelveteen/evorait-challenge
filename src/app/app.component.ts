@@ -1,9 +1,9 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, computed, inject, effect } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterOutlet } from '@angular/router';
 import { MaterialModule } from './material.module';
 import { DataService } from './services/http/data.service';
-import { DataSet } from './domain/material.interface';
+import { DataSet, MaterialModel } from './domain/material.interface';
 import { StorageService } from './services/storage/storage.service';
 
 @Component({
@@ -21,14 +21,17 @@ export class AppComponent implements OnInit {
   private dataService = inject(DataService);
   private storageService = inject(StorageService);
 
+  materials: MaterialModel[] = [];
+
   ngOnInit(): void {
     /**
-     * Upon app initialization get the data set
+     * Upon app initialization get the materials
      * from the json file and store the data in
      * localStorage
      */
-    this.dataService.loadJsonDataSet().subscribe(() => {
-      // this.storageService.saveToLocalStorage();
+    this.dataService.loadMaterials$.subscribe(response => {
+      this.materials = response;
+      this.storageService.saveToLocalStorage(this.materials);
     });
   }
 
