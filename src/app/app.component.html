@@ -42,7 +42,12 @@
       <h1>Wilkommen, {{ title }}</h1>
       <p>This app was built using the latest Angular version 17</p>
       <p>Expect to see weird syntax :P</p>
-      <button mat-raised-button color="primary" routerLink="materials" (click)="goToMaterials()">
+      <button
+        mat-raised-button
+        color="primary"
+        routerLink="materials"
+        (click)="goToMaterialsList()"
+      >
         Show Materials
       </button>
     </div>

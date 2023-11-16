@@ -13,6 +13,7 @@ import { DataService } from '../../services/http/data.service';
 import { MaterialModel } from '../../domain/material.interface';
 import { distinctUntilChanged, fromEvent, map } from 'rxjs';
 import { MaterialModule } from '../../material.module';
+import { StorageService } from '../../services/storage/storage.service';
 
 @Component({
   selector: 'app-material-list',
@@ -23,13 +24,16 @@ import { MaterialModule } from '../../material.module';
 })
 export class MaterialListComponent implements AfterViewInit {
   private dataService = inject(DataService);
+  private storageService = inject(StorageService);
   materials = this.dataService.materials;
   filteredMaterials = this.dataService.materials;
 
-  @Output() materialItemSelected: EventEmitter<MaterialModel> = new EventEmitter<MaterialModel>();
+  @Output() selectedMaterial: EventEmitter<MaterialModel> = new EventEmitter<MaterialModel>();
   @ViewChild('filterInputRef') filterInputRef: ElementRef | undefined;
+  @ViewChild('quantityInputRef') quantityInputRef: ElementRef | undefined;
 
   ngAfterViewInit(): void {
+    this.storageService.saveToLocalStorage(this.materials());
     this.filterInputRef?.nativeElement.focus();
     fromEvent(this.filterInputRef?.nativeElement, 'keyup')
       .pipe(
@@ -47,14 +51,13 @@ export class MaterialListComponent implements AfterViewInit {
    * Emits the material selected for displaying its details
    * @param materialItem the selected item from the list
    */
-  selectedMaterial(materialItem: MaterialModel): void {
-    this.materialItemSelected.emit(materialItem);
+  selectMaterial(materialItem: MaterialModel): void {
+    this.selectedMaterial.emit(materialItem);
   }
 
   bookItem(event: Event, material: MaterialModel): void {
     event.stopPropagation();
-    // console.log('clicking on booking item');
-    // console.log(material.DescTxt);
+    console.log(material.DescTxt);
   }
 
   private filterMaterialsList(terms: string): void {

@@ -16,14 +16,19 @@
   }
 
   button {
+    height: 100%;
+    margin-left: 0.5rem;
     &:hover {
       background-color: none;
     }
   }
 
   input {
-    margin-left: 1rem;
+    margin-left: 0.5rem;
     padding: 0.5rem;
     outline: none;
+  }
+  .book-quantity-container {
+    display: flex;
   }
 }

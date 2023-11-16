@@ -14,13 +14,14 @@
       </div>
     </thead>
     <tbody *ngFor="let material of filteredMaterials()">
-      <tr (click)="selectedMaterial(material)">
+      <tr (click)="selectMaterial(material)">
         <td>{{ material.DescTxt }}</td>
         <td>{{ material.CustomerPrice }}</td>
         <td>{{ material.CustomerCurrency }}</td>
         <td>{{ material.Quantity }}</td>
         <td>{{ material.Available }}</td>
-        <div>
+        <div class="book-quantity-container">
+          <input #quantityInputRef type="text" placeholder="Enter quantity" />
           <button
             type="button"
             class="btn btn-primary btn-small"

@@ -1,6 +1,6 @@
 <div class="shell-container">
   <app-material-list
-    (materialItemSelected)="displayMaterialItemDetails($event)"
+    (selectedMaterial)="displayMaterialItemDetails($event)"
     *ngIf="materials().length"
   ></app-material-list>
   <app-material-item-details
