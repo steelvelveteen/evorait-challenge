@@ -1,7 +1,11 @@
 <div class="shell-container">
   <p>The Shell</p>
   <app-material-list
-    (materialItemSelected)="displayMaterialItemDetails()"
+    (materialItemSelected)="displayMaterialItemDetails($event)"
     *ngIf="materials().length"
   ></app-material-list>
+  <app-material-item-details
+    *ngIf="materialItem"
+    [material]="materialItem"
+  ></app-material-item-details>
 </div>

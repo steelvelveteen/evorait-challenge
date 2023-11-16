@@ -21,7 +21,7 @@
           <button
             type="button"
             class="btn btn-primary btn-small"
-            (click)="bookMaterial($event, material)"
+            (click)="bookItem($event, material)"
           >
             Book
           </button>
@@ -29,8 +29,4 @@
       </tr>
     </tbody>
   </table>
-</div>
-
-<div *ngIf="selectedMaterialItem">
-  <app-material-item-details [material]="selectedMaterialItem"></app-material-item-details>
 </div>
