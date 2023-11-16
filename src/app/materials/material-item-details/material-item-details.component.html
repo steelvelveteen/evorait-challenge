@@ -1,3 +1,4 @@
-<p>material-item-details works!</p>
-<div *ngIf="material"></div>
-{{ material?.DescTxt }}
+<div *ngIf="material" class="card material-item-container">
+  <div class="item-detail-header">Detailed information for {{ material.DescTxt }}</div>
+  <div class="bold"><span>Description: </span>{{ material.Material }}</div>
+</div>
