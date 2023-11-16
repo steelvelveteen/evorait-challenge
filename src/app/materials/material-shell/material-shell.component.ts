@@ -14,4 +14,8 @@ export class MaterialShellComponent {
   private dataService = inject(DataService);
 
   materials = this.dataService.materials;
+
+  displayMaterialItemDetails(): void {
+    console.log('Displaying details');
+  }
 }

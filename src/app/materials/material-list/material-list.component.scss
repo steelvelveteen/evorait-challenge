@@ -1,0 +1,23 @@
+.material-list-container {
+  th {
+    text-align: left;
+  }
+
+  th,
+  td {
+    padding: 0.2rem 0.75rem;
+    margin: 0;
+  }
+
+  td,
+  button {
+    cursor: pointer;
+    align-self: center;
+  }
+
+  button {
+    &:hover {
+      background-color: none;
+    }
+  }
+}

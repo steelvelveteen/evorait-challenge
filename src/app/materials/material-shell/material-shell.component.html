@@ -1,2 +1,7 @@
-<p>The Shell</p>
-<app-material-list *ngIf="materials().length"></app-material-list>
+<div class="shell-container">
+  <p>The Shell</p>
+  <app-material-list
+    (materialItemSelected)="displayMaterialItemDetails()"
+    *ngIf="materials().length"
+  ></app-material-list>
+</div>

@@ -1,3 +1,36 @@
-<div *ngFor="let material of materials()">
-  <p>{{ material.Material }}</p>
+<div class="material-list-container">
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Description</th>
+        <th scope="col">Customer Price</th>
+        <th scope="col">Customer Currency</th>
+        <th scope="col">Quantity</th>
+        <th scope="col">Available</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody *ngFor="let material of materials()">
+      <tr (click)="selectedMaterial(material)">
+        <td>{{ material.DescTxt }}</td>
+        <td>{{ material.CustomerPrice }}</td>
+        <td>{{ material.CustomerCurrency }}</td>
+        <td>{{ material.Quantity }}</td>
+        <td>{{ material.Available }}</td>
+        <div>
+          <button
+            type="button"
+            class="btn btn-primary btn-small"
+            (click)="bookMaterial($event, material)"
+          >
+            Book
+          </button>
+        </div>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div *ngIf="selectedMaterialItem">
+  <app-material-item-details [material]="selectedMaterialItem"></app-material-item-details>
 </div>
