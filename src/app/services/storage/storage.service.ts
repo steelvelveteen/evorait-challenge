@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { MaterialModel, MaterialPricingSet } from '../../domain/material.interface';
+import { Observable, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -11,7 +12,7 @@ export class StorageService {
     localStorage.setItem('materials', JSON.stringify(set));
   };
 
-  getMaterialPricingSet = (): string | null => {
-    return localStorage.getItem('materials');
+  getMaterialsFromLocalStorage = (): Observable<MaterialModel[]> => {
+    return of(JSON.parse(localStorage.getItem('materials')!));
   };
 }
