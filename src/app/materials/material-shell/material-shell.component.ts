@@ -16,11 +16,9 @@ export class MaterialShellComponent {
   private dataService = inject(DataService);
 
   materials = this.dataService.materials;
-  materialItem: any;
+  materialItem!: MaterialModel;
 
   displayMaterialItemDetails(materialItem: MaterialModel): void {
     this.materialItem = materialItem;
-    console.log(materialItem);
-    console.log('Displaying details');
   }
 }

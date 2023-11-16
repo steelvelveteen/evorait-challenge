@@ -10,11 +10,10 @@
         <th></th>
       </tr>
       <div>
-        <input matInput #filterInputRef (change)="filter(filterInputRef.value)" type="text" />
-        filtering here
+        <input matInput #filterInputRef type="text" placeholder="Filter by Description" />
       </div>
     </thead>
-    <tbody *ngFor="let material of materials()">
+    <tbody *ngFor="let material of filteredMaterials()">
       <tr (click)="selectedMaterial(material)">
         <td>{{ material.DescTxt }}</td>
         <td>{{ material.CustomerPrice }}</td>
