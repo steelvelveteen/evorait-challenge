@@ -1,4 +1,4 @@
-# EvoraitChallenge
+# EvoraIT Challenge
 
 Please setup an angular application with a list view for "materials". The data is attached as json to this mail and should be read from that file initially. Afterwards please use some kind of local storage technology in the browser, so that data changes survive reloading of the page. The application only needs to work using this local storage after the initial import.
 
