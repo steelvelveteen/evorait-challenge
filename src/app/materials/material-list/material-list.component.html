@@ -9,6 +9,10 @@
         <th scope="col">Available</th>
         <th></th>
       </tr>
+      <div>
+        <input matInput #filterInputRef (change)="filter(filterInputRef.value)" type="text" />
+        filtering here
+      </div>
     </thead>
     <tbody *ngFor="let material of materials()">
       <tr (click)="selectedMaterial(material)">
