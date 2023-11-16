@@ -3,6 +3,7 @@ import { Injectable, inject } from '@angular/core';
 import { map } from 'rxjs';
 import { DataSet, MaterialModel } from '../../domain/material.interface';
 import { toSignal } from '@angular/core/rxjs-interop';
+
 const JSONUrl = '/assets/MatPricingSet.json';
 
 @Injectable({
