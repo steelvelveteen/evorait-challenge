@@ -60,6 +60,22 @@ export class MaterialListComponent implements AfterViewInit {
     console.log(material.DescTxt);
   }
 
+  /**
+   * prevents user from entering non-numerical values
+   *
+   * @param event the event coming from book input
+   */
+  handleBookInputChange(event: Event): void {
+    const inputElement = event.target as HTMLInputElement;
+    const inputValue = inputElement.value.trim();
+    if (/^\d+$/.test(inputValue)) {
+    } else {
+      if (this.quantityInputRef) {
+        this.quantityInputRef.nativeElement.value = '';
+      }
+    }
+  }
+
   private filterMaterialsList(terms: string): void {
     this.filteredMaterials = computed(() => {
       return this.materials().filter(item =>

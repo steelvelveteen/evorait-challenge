@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-import { EMPTY, Observable, map, mergeMap, of } from 'rxjs';
+import { Observable, map, mergeMap, of } from 'rxjs';
 import { DataSet, MaterialModel } from '../../domain/material.interface';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { StorageService } from '../storage/storage.service';
@@ -18,7 +18,7 @@ export class DataService {
   // loadMaterials$ = this.http
   //   .get<DataSet>(JSONUrl)
   //   .pipe(map((data: DataSet) => data.d.PartSet.results));
-  loadMaterials$: Observable<MaterialModel[]> = this.storageService
+  private loadMaterials$: Observable<MaterialModel[]> = this.storageService
     .getMaterialsFromLocalStorage()
     .pipe(
       mergeMap(localStorageData => {
