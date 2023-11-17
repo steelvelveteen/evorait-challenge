@@ -33,5 +33,6 @@ export class DataService {
   materials = toSignal<MaterialModel[], MaterialModel[]>(this.loadMaterials$, {
     initialValue: [] as MaterialModel[],
   });
+  materialsUpdate = signal(this.materials());
   materialItemSelected = signal<MaterialModel | undefined>(undefined);
 }

@@ -7,6 +7,7 @@ import {
   ViewChild,
   computed,
   inject,
+  signal,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DataService } from '../../services/http/data.service';
@@ -60,9 +61,20 @@ export class MaterialListComponent implements AfterViewInit {
     this.dataService.materialItemSelected.set(materialItem);
   }
 
-  bookItem(event: Event, material: MaterialModel): void {
+  bookMaterial(event: Event, material: MaterialModel): void {
     event.stopPropagation();
-    console.log(material.DescTxt);
+
+    const selectedMaterial = this.dataService.materialItemSelected();
+    const bookedQuantity = this.quantityInputRef?.nativeElement.value;
+    const foundMaterial = this.dataService
+      .materials()
+      .find(item => item.DescTxt === material.DescTxt);
+
+    // this.materials.update(items =>
+    //   items.map(item =>
+    //     item.DescTxt === material.DescTxt ? { vehicle: cartItem.vehicle, quantity } : item
+    //   )
+    // );
   }
 
   /**
