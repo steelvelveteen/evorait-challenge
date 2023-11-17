@@ -33,6 +33,22 @@ export class DataService {
   materials = toSignal<MaterialModel[], MaterialModel[]>(this.loadMaterials$, {
     initialValue: [] as MaterialModel[],
   });
-  materialsUpdate = signal(this.materials());
+  materialsList = signal(this.materials());
   materialItemSelected = signal<MaterialModel | undefined>(undefined);
+
+  /**
+   * When booking update the list
+   * @param material
+   * @param quantity
+   */
+  updateMaterials(material: MaterialModel, quantity: string): void {
+    const foundMaterial = this.materials().find(item => item.DescTxt === material.DescTxt);
+
+    if (foundMaterial) {
+      foundMaterial.Quantity = quantity;
+    }
+
+    this.materialsList.update(() => [...this.materials(), material]);
+    console.log(this.materials());
+  }
 }

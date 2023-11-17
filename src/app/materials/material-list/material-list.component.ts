@@ -63,18 +63,8 @@ export class MaterialListComponent implements AfterViewInit {
 
   bookMaterial(event: Event, material: MaterialModel): void {
     event.stopPropagation();
-
-    const selectedMaterial = this.dataService.materialItemSelected();
     const bookedQuantity = this.quantityInputRef?.nativeElement.value;
-    const foundMaterial = this.dataService
-      .materials()
-      .find(item => item.DescTxt === material.DescTxt);
-
-    // this.materials.update(items =>
-    //   items.map(item =>
-    //     item.DescTxt === material.DescTxt ? { vehicle: cartItem.vehicle, quantity } : item
-    //   )
-    // );
+    this.dataService.updateMaterials(material, bookedQuantity);
   }
 
   /**
