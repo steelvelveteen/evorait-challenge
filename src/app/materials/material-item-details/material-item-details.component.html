@@ -1,4 +1,12 @@
-<div *ngIf="material" class="card material-item-container">
-  <div class="item-detail-header">Detailed information for {{ material.DescTxt }}</div>
-  <div class="bold"><span>Description: </span>{{ material.Material }}</div>
+<div *ngIf="material()" class="card material-item-container">
+  <div class="item-detail-header">Detailed information for {{ material()?.DescTxt }}</div>
+  <div class="bold"><span>Description: </span>{{ material()?.Material }}</div>
+  <button
+    mat-raised-button
+    color="primary"
+    routerLink="materials"
+    (click)="returnToMaterialsPage()"
+  >
+    Return to Materials list
+  </button>
 </div>

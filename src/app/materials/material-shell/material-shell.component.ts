@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { DataService } from '../../services/http/data.service';
 import { MaterialListComponent } from '../material-list/material-list.component';
 import { MaterialItemDetailsComponent } from '../material-item-details/material-item-details.component';
-import { MaterialModel } from '../../domain/material.interface';
 
 @Component({
   selector: 'app-material-shell',
@@ -16,9 +15,4 @@ export class MaterialShellComponent {
   private dataService = inject(DataService);
 
   materials = this.dataService.materials;
-  materialItem!: MaterialModel;
-
-  displayMaterialItemDetails(materialItem: MaterialModel): void {
-    this.materialItem = materialItem;
-  }
 }

@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable, inject } from '@angular/core';
+import { Injectable, inject, signal } from '@angular/core';
 import { Observable, map, mergeMap, of } from 'rxjs';
 import { DataSet, MaterialModel } from '../../domain/material.interface';
 import { toSignal } from '@angular/core/rxjs-interop';
@@ -14,10 +14,6 @@ export class DataService {
   private http = inject(HttpClient);
   private storageService = inject(StorageService);
 
-  // private loadMaterials$ = this.http
-  // loadMaterials$ = this.http
-  //   .get<DataSet>(JSONUrl)
-  //   .pipe(map((data: DataSet) => data.d.PartSet.results));
   private loadMaterials$: Observable<MaterialModel[]> = this.storageService
     .getMaterialsFromLocalStorage()
     .pipe(
@@ -34,8 +30,8 @@ export class DataService {
       })
     );
 
-  // Somehow signals are still buggy?
   materials = toSignal<MaterialModel[], MaterialModel[]>(this.loadMaterials$, {
     initialValue: [] as MaterialModel[],
   });
+  materialItemSelected = signal<MaterialModel | undefined>(undefined);
 }

@@ -1,14 +1,23 @@
-import { Component, Input } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MaterialModel } from '../../domain/material.interface';
+import { DataService } from '../../services/http/data.service';
+import { Router } from '@angular/router';
+import { MaterialModule } from '../../material.module';
 
 @Component({
   selector: 'app-material-item-details',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, MaterialModule],
   templateUrl: './material-item-details.component.html',
   styleUrl: './material-item-details.component.scss',
 })
 export class MaterialItemDetailsComponent {
-  @Input() material: MaterialModel | null = null;
+  private dataService = inject(DataService);
+  private router = inject(Router);
+
+  material = this.dataService.materialItemSelected;
+
+  returnToMaterialsPage(): void {
+    this.router.navigate(['materials']);
+  }
 }

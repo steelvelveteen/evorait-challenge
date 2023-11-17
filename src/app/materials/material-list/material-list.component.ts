@@ -14,6 +14,7 @@ import { MaterialModel } from '../../domain/material.interface';
 import { distinctUntilChanged, fromEvent, map } from 'rxjs';
 import { MaterialModule } from '../../material.module';
 import { StorageService } from '../../services/storage/storage.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-material-list',
@@ -25,6 +26,8 @@ import { StorageService } from '../../services/storage/storage.service';
 export class MaterialListComponent implements AfterViewInit {
   private dataService = inject(DataService);
   private storageService = inject(StorageService);
+  private router = inject(Router);
+
   materials = this.dataService.materials;
   filteredMaterials = this.dataService.materials;
 
@@ -52,7 +55,9 @@ export class MaterialListComponent implements AfterViewInit {
    * @param materialItem the selected item from the list
    */
   selectMaterial(materialItem: MaterialModel): void {
+    this.router.navigate(['details']);
     this.selectedMaterial.emit(materialItem);
+    this.dataService.materialItemSelected.set(materialItem);
   }
 
   bookItem(event: Event, material: MaterialModel): void {
