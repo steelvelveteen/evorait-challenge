@@ -20,16 +20,24 @@
         <td>{{ material.CustomerCurrency }}</td>
         <td>{{ material.Quantity }}</td>
         <td>{{ material.Available }}</td>
-        <div class="book-quantity-container">
-          <input #quantityInputRef type="text" placeholder="Enter quantity" />
-          <button
-            type="button"
-            class="btn btn-primary btn-small"
-            (click)="bookItem($event, material)"
-          >
-            Book
-          </button>
-        </div>
+        <td>
+          <div class="book-quantity-container">
+            <input
+              #quantityInputRef
+              type="text"
+              placeholder="Enter quantity"
+              pattern="[0-9]*"
+              (click)="$event.stopPropagation()"
+            />
+            <button
+              type="button"
+              class="btn btn-primary btn-small"
+              (click)="bookItem($event, material)"
+            >
+              Book
+            </button>
+          </div>
+        </td>
       </tr>
     </tbody>
   </table>
