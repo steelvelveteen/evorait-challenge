@@ -45,7 +45,8 @@ export class DataService {
     const foundMaterial = this.materials().find(item => item.DescTxt === material.DescTxt);
 
     if (foundMaterial) {
-      foundMaterial.Quantity = quantity;
+      foundMaterial.Quantity = (parseInt(foundMaterial.Quantity) + parseInt(quantity)).toString();
+      foundMaterial.Available = (parseInt(foundMaterial.Available) - parseInt(quantity)).toString();
     }
 
     this.materialsList.update(() => [...this.materials(), material]);

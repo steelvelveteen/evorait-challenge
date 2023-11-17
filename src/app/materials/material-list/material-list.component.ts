@@ -31,6 +31,7 @@ export class MaterialListComponent implements AfterViewInit {
 
   materials = this.dataService.materials;
   filteredMaterials = this.dataService.materials;
+  bookedQuantity: string = '';
 
   @Output() selectedMaterial: EventEmitter<MaterialModel> = new EventEmitter<MaterialModel>();
   @ViewChild('filterInputRef') filterInputRef: ElementRef | undefined;
@@ -61,10 +62,11 @@ export class MaterialListComponent implements AfterViewInit {
     this.dataService.materialItemSelected.set(materialItem);
   }
 
-  bookMaterial(event: Event, material: MaterialModel): void {
+  bookMaterial(event: Event, quantity: string, material: MaterialModel): void {
     event.stopPropagation();
-    const bookedQuantity = this.quantityInputRef?.nativeElement.value;
-    this.dataService.updateMaterials(material, bookedQuantity);
+
+    this.bookedQuantity = quantity;
+    this.dataService.updateMaterials(material, this.bookedQuantity);
   }
 
   /**

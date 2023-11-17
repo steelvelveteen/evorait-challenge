@@ -1,6 +1,6 @@
 <div class="material-list-container">
   <table class="table">
-    <thead>
+    <thead class="thead-light">
       <tr>
         <th scope="col">Description</th>
         <th scope="col">Customer Price</th>
@@ -35,7 +35,7 @@
               color="primary"
               type="button"
               class="btn btn-primary btn-small"
-              (click)="bookMaterial($event, material)"
+              (click)="bookMaterial($event, quantityInputRef.value, material)"
             >
               Book
             </button>
