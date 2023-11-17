@@ -49,6 +49,5 @@ export class DataService {
     }
 
     this.materialsList.update(() => [...this.materials(), material]);
-    console.log(this.materials());
   }
 }
