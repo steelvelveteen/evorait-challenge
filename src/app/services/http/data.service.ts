@@ -49,5 +49,6 @@ export class DataService {
     }
 
     this.materialsList.update(() => [...this.materials(), material]);
+    this.storageService.saveToLocalStorage(this.materials());
   }
 }
