@@ -4,7 +4,6 @@ import { DataService } from '../../services/http/data.service';
 import { MaterialModel } from '../../domain/material.interface';
 import { distinctUntilChanged, fromEvent, map } from 'rxjs';
 import { MaterialModule } from '../../material.module';
-import { LS_ITEM_NAME, StorageService } from '../../services/storage/storage.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -16,7 +15,6 @@ import { Router } from '@angular/router';
 })
 export class MaterialListComponent implements AfterViewInit {
   private dataService = inject(DataService);
-  private storageService = inject(StorageService);
   private router = inject(Router);
 
   materials = this.dataService.materials;
@@ -27,7 +25,6 @@ export class MaterialListComponent implements AfterViewInit {
   @ViewChild('quantityInputRef') quantityInputRef: ElementRef | undefined;
 
   ngAfterViewInit(): void {
-    this.storageService.save(LS_ITEM_NAME.MaterialsList, this.materials());
     this.filterInputRef?.nativeElement.focus();
     fromEvent(this.filterInputRef?.nativeElement, 'keyup')
       .pipe(
@@ -47,7 +44,6 @@ export class MaterialListComponent implements AfterViewInit {
    */
   selectMaterial(materialItem: MaterialModel): void {
     this.router.navigate(['details']);
-    // this.selectedMaterial.emit(materialItem);
     this.dataService.selectMaterial(materialItem);
   }
 

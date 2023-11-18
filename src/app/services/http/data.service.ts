@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject, signal } from '@angular/core';
-import { Observable, map, mergeMap, of } from 'rxjs';
+import { Observable, map, mergeMap, of, tap } from 'rxjs';
 import { DataSet, MaterialModel } from '../../domain/material.interface';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { LS_ITEM_NAME, StorageService } from '../storage/storage.service';
@@ -23,9 +23,13 @@ export class DataService {
           return of(localStorageData);
         } else {
           // If local storage is empty, make an HTTP request
-          return this.http
-            .get<DataSet>(JSONUrl)
-            .pipe(map((data: DataSet) => data.d.PartSet.results));
+          // and save in local storage
+          return this.http.get<DataSet>(JSONUrl).pipe(
+            map((data: DataSet) => data.d.PartSet.results),
+            tap((results: MaterialModel[]) =>
+              this.storageService.save(LS_ITEM_NAME.MaterialsList, results)
+            )
+          );
         }
       })
     );
