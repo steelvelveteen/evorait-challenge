@@ -1,4 +1,4 @@
-export interface MaterialModel {
+export interface Material {
   Material: string;
   Quantity: string;
   DescTxt: string;
@@ -19,7 +19,7 @@ export interface MaterialPricingSet {
   FrontId: string;
   NotificationNo: string;
   PartSet: {
-    results: MaterialModel[];
+    results: Material[];
   };
 }
 

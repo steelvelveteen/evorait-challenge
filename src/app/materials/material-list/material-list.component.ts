@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, ElementRef, ViewChild, computed, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DataService } from '../../services/http/data.service';
-import { MaterialModel } from '../../domain/material.interface';
+import { Material } from '../../domain/material.interface';
 import { distinctUntilChanged, fromEvent, map } from 'rxjs';
 import { MaterialModule } from '../../material.module';
 import { Router } from '@angular/router';
@@ -42,12 +42,12 @@ export class MaterialListComponent implements AfterViewInit {
    * Emits the material selected for displaying its details
    * @param materialItem the selected item from the list
    */
-  selectMaterial(materialItem: MaterialModel): void {
+  selectMaterial(materialItem: Material): void {
     this.router.navigate(['details']);
     this.dataService.selectMaterial(materialItem);
   }
 
-  bookMaterial(event: Event, quantity: string, material: MaterialModel): void {
+  bookMaterial(event: Event, quantity: string, material: Material): void {
     event.stopPropagation();
 
     this.bookedQuantity = quantity;
