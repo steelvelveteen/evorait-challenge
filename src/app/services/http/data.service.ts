@@ -38,7 +38,7 @@ export class DataService {
     initialValue: [] as MaterialModel[],
   });
   materialsList = signal(this.materials());
-  selectedMaterial = signal<MaterialModel | undefined>(undefined);
+  selectedMaterial = signal<MaterialModel | null>(null);
 
   /**
    * When booking update the list
@@ -60,5 +60,10 @@ export class DataService {
   selectMaterial(material: MaterialModel): void {
     this.selectedMaterial.set(material);
     this.storageService.save(LS_ITEM_NAME.SelectedMaterial, material);
+  }
+
+  getSelectedMaterial(): void {
+    const selectedMaterial = this.storageService.getSingle();
+    this.selectedMaterial.set(selectedMaterial);
   }
 }

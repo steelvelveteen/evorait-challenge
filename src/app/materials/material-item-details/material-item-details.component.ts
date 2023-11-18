@@ -17,6 +17,10 @@ export class MaterialItemDetailsComponent {
 
   selectedMaterial = this.dataService.selectedMaterial;
 
+  constructor() {
+    this.dataService.getSelectedMaterial();
+  }
+
   returnToMaterialsPage(): void {
     this.router.navigate(['materials']);
   }
