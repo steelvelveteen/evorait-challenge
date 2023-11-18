@@ -3,7 +3,7 @@ import { Injectable, inject, signal } from '@angular/core';
 import { Observable, map, mergeMap, of } from 'rxjs';
 import { DataSet, MaterialModel } from '../../domain/material.interface';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { StorageService } from '../storage/storage.service';
+import { LS_ITEM_NAME, StorageService } from '../storage/storage.service';
 
 const JSONUrl = '/assets/MatPricingSet.json';
 
@@ -14,8 +14,8 @@ export class DataService {
   private http = inject(HttpClient);
   private storageService = inject(StorageService);
 
-  private loadMaterials$: Observable<MaterialModel[]> = this.storageService
-    .getMaterialsFromLocalStorage()
+  private getMaterialsList$: Observable<MaterialModel[]> = this.storageService
+    .get('materials')
     .pipe(
       mergeMap(localStorageData => {
         if (localStorageData) {
@@ -30,11 +30,11 @@ export class DataService {
       })
     );
 
-  materials = toSignal<MaterialModel[], MaterialModel[]>(this.loadMaterials$, {
+  materials = toSignal<MaterialModel[], MaterialModel[]>(this.getMaterialsList$, {
     initialValue: [] as MaterialModel[],
   });
   materialsList = signal(this.materials());
-  materialItemSelected = signal<MaterialModel | undefined>(undefined);
+  selectedMaterial = signal<MaterialModel | undefined>(undefined);
 
   /**
    * When booking update the list
@@ -50,6 +50,11 @@ export class DataService {
     }
 
     this.materialsList.update(() => [...this.materials(), material]);
-    this.storageService.saveToLocalStorage(this.materials());
+    this.storageService.save(LS_ITEM_NAME.MaterialsList, this.materials());
+  }
+
+  selectMaterial(material: MaterialModel): void {
+    this.selectedMaterial.set(material);
+    this.storageService.save(LS_ITEM_NAME.SelectedMaterial, material);
   }
 }

@@ -15,7 +15,7 @@ export class MaterialItemDetailsComponent {
   private dataService = inject(DataService);
   private router = inject(Router);
 
-  material = this.dataService.materialItemSelected;
+  selectedMaterial = this.dataService.selectedMaterial;
 
   returnToMaterialsPage(): void {
     this.router.navigate(['materials']);

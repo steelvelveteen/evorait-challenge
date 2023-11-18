@@ -1,6 +1,6 @@
-<div *ngIf="material()" class="material-details-container">
-  <div class="item-detail-header">Detailed information for {{ material()?.DescTxt }}</div>
-  <div class="bold"><span>Description: </span>{{ material()?.Material }}</div>
+<div *ngIf="selectedMaterial()" class="material-details-container">
+  <div class="item-detail-header">Detailed information for {{ selectedMaterial()?.DescTxt }}</div>
+  <div class="bold"><span>Description: </span>{{ selectedMaterial()?.Material }}</div>
   <button
     mat-raised-button
     color="primary"

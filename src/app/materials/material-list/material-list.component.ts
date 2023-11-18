@@ -1,20 +1,10 @@
-import {
-  AfterViewInit,
-  Component,
-  ElementRef,
-  EventEmitter,
-  Output,
-  ViewChild,
-  computed,
-  inject,
-  signal,
-} from '@angular/core';
+import { AfterViewInit, Component, ElementRef, ViewChild, computed, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DataService } from '../../services/http/data.service';
 import { MaterialModel } from '../../domain/material.interface';
 import { distinctUntilChanged, fromEvent, map } from 'rxjs';
 import { MaterialModule } from '../../material.module';
-import { StorageService } from '../../services/storage/storage.service';
+import { LS_ITEM_NAME, StorageService } from '../../services/storage/storage.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -33,12 +23,11 @@ export class MaterialListComponent implements AfterViewInit {
   filteredMaterials = this.dataService.materials;
   bookedQuantity: string = '';
 
-  @Output() selectedMaterial: EventEmitter<MaterialModel> = new EventEmitter<MaterialModel>();
   @ViewChild('filterInputRef') filterInputRef: ElementRef | undefined;
   @ViewChild('quantityInputRef') quantityInputRef: ElementRef | undefined;
 
   ngAfterViewInit(): void {
-    this.storageService.saveToLocalStorage(this.materials());
+    this.storageService.save(LS_ITEM_NAME.MaterialsList, this.materials());
     this.filterInputRef?.nativeElement.focus();
     fromEvent(this.filterInputRef?.nativeElement, 'keyup')
       .pipe(
@@ -58,8 +47,8 @@ export class MaterialListComponent implements AfterViewInit {
    */
   selectMaterial(materialItem: MaterialModel): void {
     this.router.navigate(['details']);
-    this.selectedMaterial.emit(materialItem);
-    this.dataService.materialItemSelected.set(materialItem);
+    // this.selectedMaterial.emit(materialItem);
+    this.dataService.selectMaterial(materialItem);
   }
 
   bookMaterial(event: Event, quantity: string, material: MaterialModel): void {

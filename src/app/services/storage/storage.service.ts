@@ -1,18 +1,20 @@
 import { Injectable } from '@angular/core';
-import { MaterialModel, MaterialPricingSet } from '../../domain/material.interface';
+import { MaterialModel } from '../../domain/material.interface';
 import { Observable, of } from 'rxjs';
 
+export enum LS_ITEM_NAME {
+  MaterialsList = 'materials',
+  SelectedMaterial = 'selected-material',
+}
 @Injectable({
   providedIn: 'root',
 })
 export class StorageService {
-  constructor() {}
+  save(itemName: string, item: MaterialModel[] | MaterialModel): void {
+    localStorage.setItem(itemName, JSON.stringify(item));
+  }
 
-  saveToLocalStorage = (set: MaterialModel[]): void => {
-    localStorage.setItem('materials', JSON.stringify(set));
-  };
-
-  getMaterialsFromLocalStorage = (): Observable<MaterialModel[]> => {
-    return of(JSON.parse(localStorage.getItem('materials')!));
-  };
+  get(itemName: string): Observable<MaterialModel[]> {
+    return of(JSON.parse(localStorage.getItem(itemName)!));
+  }
 }
