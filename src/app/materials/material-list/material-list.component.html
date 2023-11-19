@@ -13,7 +13,8 @@
         <input matInput #filterInputRef type="text" placeholder="Filter by Description" />
       </div>
     </thead>
-    <tbody *ngFor="let material of filteredMaterials()">
+    <tbody>
+      @for (material of filteredMaterials(); track $index) {
       <tr (click)="selectMaterial(material)">
         <td>{{ material.DescTxt }}</td>
         <td>{{ material.CustomerPrice }}</td>
@@ -42,6 +43,7 @@
           </div>
         </td>
       </tr>
+      }
     </tbody>
   </table>
 </div>
