@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, ViewChild, inject } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, ViewChild, computed, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DataService } from '../../services/http/data.service';
 import { Material } from '../../domain/material.interface';
@@ -18,7 +18,7 @@ export class MaterialListComponent implements AfterViewInit {
   private router = inject(Router);
 
   materials = this.dataService.materials;
-  filteredMaterials = this.materials();
+  filteredMaterials = this.dataService.materials;
 
   @ViewChild('filterInputRef') filterInputRef: ElementRef | undefined;
   @ViewChild('quantityInputRef') quantityInputRef: ElementRef | undefined;
@@ -75,8 +75,8 @@ export class MaterialListComponent implements AfterViewInit {
   }
 
   private filterMaterialsList(terms: string): void {
-    this.filteredMaterials = this.materials().filter(item =>
-      item.DescTxt.toLowerCase().includes(terms.toLowerCase())
+    this.filteredMaterials = computed(() =>
+      this.materials().filter(item => item.DescTxt.toLowerCase().includes(terms.toLowerCase()))
     );
   }
 }
