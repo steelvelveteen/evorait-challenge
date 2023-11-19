@@ -1,15 +1,13 @@
 <div class="material-list-container">
-  <tr>
-    <th>Description</th>
-    <th>Customer Price</th>
-    <th>Customer Currency</th>
-    <th>Quantity</th>
-    <th>Available</th>
-    <th></th>
-  </tr>
   <div>
     <input matInput #filterInputRef type="text" placeholder="Search by Description" />
   </div>
+  <th>Description</th>
+  <th>Customer Price</th>
+  <th>Customer Currency</th>
+  <th>Quantity</th>
+  <th>Available</th>
+  <th></th>
   <tbody>
     @for (material of filteredMaterials(); track $index) {
     <app-material-item [material]="material" />
