@@ -1,49 +1,18 @@
 .material-list-container {
-  table {
-    display: flex;
-    flex-direction: column;
-  }
-  thead,
   tbody {
     display: flex;
     flex-direction: column;
   }
+
   th {
     text-align: left;
-  }
-
-  th,
-  td {
     padding: 0.2rem 0.75rem;
     margin: 0;
-  }
-
-  td {
-    cursor: pointer;
-    align-self: center;
-  }
-
-  tbody tr {
-    &:hover {
-      background-color: rgb(238, 237, 237);
-    }
-  }
-
-  button {
-    height: 100%;
-    padding: 0.5rem 1rem;
-    margin-left: 0.5rem;
-    &:hover {
-      background-color: none;
-    }
   }
 
   input {
     margin-left: 0.5rem;
     padding: 0.5rem;
     outline: none;
-  }
-  .book-quantity-container {
-    display: flex;
   }
 }

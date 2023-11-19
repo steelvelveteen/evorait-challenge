@@ -1,52 +1,18 @@
 <div class="material-list-container">
-  <table>
-    <thead>
-      <tr>
-        <th scope="col">Description</th>
-        <th scope="col">Customer Price</th>
-        <th scope="col">Customer Currency</th>
-        <th scope="col">Quantity</th>
-        <th scope="col">Available</th>
-        <th></th>
-      </tr>
-      <div>
-        <input matInput #filterInputRef type="text" placeholder="Filter by Description" />
-      </div>
-    </thead>
-    <tbody>
-      @for (material of filteredMaterials(); track $index) {
-      <!-- <tr> -->
-      <app-material-item [material]="material" />
-      <!-- </tr> -->
-      <!-- <tr (click)="selectMaterial(material)">
-        <td>{{ material.DescTxt }}</td>
-        <td>{{ material.CustomerPrice }}</td>
-        <td>{{ material.CustomerCurrency }}</td>
-        <td>{{ material.Quantity }}</td>
-        <td>{{ material.Available }}</td>
-        <td>
-          <div class="book-quantity-container">
-            <input
-              #quantityInputRef
-              type="text"
-              placeholder="Enter quantity"
-              pattern="[0-9]*"
-              (click)="$event.stopPropagation()"
-              (input)="handleBookInputChange($event)"
-            />
-            <button
-              mat-raised-button
-              color="primary"
-              type="button"
-              class="btn btn-primary btn-small"
-              (click)="bookMaterial($event, quantityInputRef.value, material)"
-            >
-              Book
-            </button>
-          </div>
-        </td>
-      </tr> -->
-      }
-    </tbody>
-  </table>
+  <tr>
+    <th>Description</th>
+    <th>Customer Price</th>
+    <th>Customer Currency</th>
+    <th>Quantity</th>
+    <th>Available</th>
+    <th></th>
+  </tr>
+  <div>
+    <input matInput #filterInputRef type="text" placeholder="Search by Description" />
+  </div>
+  <tbody>
+    @for (material of filteredMaterials(); track $index) {
+    <app-material-item [material]="material" />
+    }
+  </tbody>
 </div>

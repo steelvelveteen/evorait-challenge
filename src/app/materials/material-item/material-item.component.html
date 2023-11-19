@@ -5,23 +5,22 @@
   <td>{{ material.Quantity }}</td>
   <td>{{ material.Available }}</td>
 </div>
-<td>
-  <div class="book-quantity-container">
-    <input
-      #quantityInputRef
-      type="text"
-      placeholder="Enter quantity"
-      pattern="[0-9]*"
-      (input)="handleBookInputChange($event)"
-    />
-    <button
-      mat-raised-button
-      color="primary"
-      type="button"
-      class="btn btn-primary btn-small"
-      (click)="bookMaterial(quantityInputRef.value, material)"
-    >
-      Book
-    </button>
-  </div>
-</td>
+<div class="book-quantity-container">
+  <input
+    matInput
+    #quantityInputRef
+    type="text"
+    placeholder="Enter quantity"
+    pattern="[0-9]*"
+    (input)="handleBookInputChange($event)"
+  />
+  <button
+    mat-raised-button
+    color="primary"
+    type="button"
+    class="btn btn-primary btn-small"
+    (click)="bookMaterial(quantityInputRef.value, material)"
+  >
+    Book
+  </button>
+</div>

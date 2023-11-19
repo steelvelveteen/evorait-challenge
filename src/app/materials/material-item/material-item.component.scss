@@ -1,30 +1,24 @@
 :host {
   display: flex;
-  align-items: center;
+  align-items: baseline;
 
-  td {
-    padding: 0.2rem 0.75rem;
-    margin: 0;
-  }
-
-  td {
-    cursor: pointer;
-    align-self: center;
-  }
-
-  tbody tr {
+  .material-row {
+    margin: 0.25rem 0rem;
+    padding: 0.5rem 0rem;
     &:hover {
       background-color: rgb(238, 237, 237);
+    }
+
+    td {
+      padding: 0.2rem 0.75rem;
+      margin: 0;
+      cursor: pointer;
+      align-self: center;
     }
   }
 
   button {
-    height: 100%;
-    padding: 0.5rem 1rem;
     margin-left: 0.5rem;
-    &:hover {
-      background-color: none;
-    }
   }
 
   input {
