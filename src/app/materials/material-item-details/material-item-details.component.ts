@@ -7,9 +7,9 @@ import { MaterialModule } from '../../material.module';
 @Component({
   selector: 'app-material-item-details',
   standalone: true,
+  imports: [CommonModule, MaterialModule],
   templateUrl: './material-item-details.component.html',
   styleUrl: './material-item-details.component.scss',
-  imports: [CommonModule, MaterialModule],
 })
 export class MaterialItemDetailsComponent {
   private dataService = inject(DataService);

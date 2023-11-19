@@ -1,20 +1,6 @@
 .material-details-container {
-  display: flex;
-  align-items: flex-start;
   margin: 1rem 2rem;
-  .book-quantity-container {
-    display: flex;
-    align-items: baseline;
-    input {
-      margin-left: 0.5rem;
-      padding: 0.5rem;
-      outline: none;
-    }
-    button {
-      margin-left: 0.5rem;
-    }
-  }
-  .item-detail-header {
+  .item-detail-header  {
     font-weight: 700;
   }
   .item-key {

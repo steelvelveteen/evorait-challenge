@@ -1,12 +1,4 @@
-import {
-  AfterViewInit,
-  Component,
-  ElementRef,
-  ViewChild,
-  computed,
-  inject,
-  signal,
-} from '@angular/core';
+import { AfterViewInit, Component, ElementRef, ViewChild, computed, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DataService } from '../../services/http/data.service';
 import { Material } from '../../domain/material.interface';
@@ -27,8 +19,6 @@ export class MaterialListComponent implements AfterViewInit {
 
   materials = this.dataService.materials;
   filteredMaterials = this.dataService.materials;
-  isBookBtnDisabled = signal(true);
-  bookingError = signal(false);
 
   @ViewChild('filterInputRef') filterInputRef: ElementRef | undefined;
   @ViewChild('quantityInputRef') quantityInputRef: ElementRef | undefined;
@@ -58,13 +48,7 @@ export class MaterialListComponent implements AfterViewInit {
 
   bookMaterial(event: Event, quantity: string, material: Material): void {
     event.stopPropagation();
-    // Prevents user to book without entering quantity
-    if (!quantity) return;
 
-    // Prevents user to book quantity greater than what's available
-    if (quantity > material.Available) return;
-
-    // Book material
     this.dataService.bookMaterial(material, quantity);
   }
 
