@@ -40,11 +40,11 @@ export class DataService {
   selectedMaterial = signal<Material | null>(null);
 
   /**
-   * When booking update the list
+   * Books material and updates list information
    * @param material
    * @param quantity
    */
-  updateMaterials(material: Material, quantity: string): void {
+  bookMaterial(material: Material, quantity: string): void {
     const foundMaterial = this.materials().find(item => item.DescTxt === material.DescTxt);
 
     if (foundMaterial) {

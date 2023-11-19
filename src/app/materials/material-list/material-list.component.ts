@@ -19,7 +19,6 @@ export class MaterialListComponent implements AfterViewInit {
 
   materials = this.dataService.materials;
   filteredMaterials = this.dataService.materials;
-  bookedQuantity: string = '';
 
   @ViewChild('filterInputRef') filterInputRef: ElementRef | undefined;
   @ViewChild('quantityInputRef') quantityInputRef: ElementRef | undefined;
@@ -50,8 +49,7 @@ export class MaterialListComponent implements AfterViewInit {
   bookMaterial(event: Event, quantity: string, material: Material): void {
     event.stopPropagation();
 
-    this.bookedQuantity = quantity;
-    this.dataService.updateMaterials(material, this.bookedQuantity);
+    this.dataService.bookMaterial(material, quantity);
   }
 
   /**
