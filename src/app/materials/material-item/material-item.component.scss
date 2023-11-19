@@ -1,18 +1,7 @@
-.material-list-container {
-  table {
-    display: flex;
-    flex-direction: column;
-  }
-  thead,
-  tbody {
-    display: flex;
-    flex-direction: column;
-  }
-  th {
-    text-align: left;
-  }
+:host {
+  display: flex;
+  align-items: center;
 
-  th,
   td {
     padding: 0.2rem 0.75rem;
     margin: 0;

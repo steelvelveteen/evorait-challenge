@@ -15,7 +15,10 @@
     </thead>
     <tbody>
       @for (material of filteredMaterials(); track $index) {
-      <tr (click)="selectMaterial(material)">
+      <!-- <tr> -->
+      <app-material-item [material]="material" />
+      <!-- </tr> -->
+      <!-- <tr (click)="selectMaterial(material)">
         <td>{{ material.DescTxt }}</td>
         <td>{{ material.CustomerPrice }}</td>
         <td>{{ material.CustomerCurrency }}</td>
@@ -42,7 +45,7 @@
             </button>
           </div>
         </td>
-      </tr>
+      </tr> -->
       }
     </tbody>
   </table>

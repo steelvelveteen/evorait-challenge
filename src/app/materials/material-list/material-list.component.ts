@@ -5,13 +5,14 @@ import { Material } from '../../domain/material.interface';
 import { distinctUntilChanged, fromEvent, map } from 'rxjs';
 import { MaterialModule } from '../../material.module';
 import { Router } from '@angular/router';
+import { MaterialItemComponent } from '../material-item/material-item.component';
 
 @Component({
   selector: 'app-material-list',
   standalone: true,
   templateUrl: './material-list.component.html',
   styleUrl: './material-list.component.scss',
-  imports: [CommonModule, MaterialModule],
+  imports: [CommonModule, MaterialModule, MaterialItemComponent],
 })
 export class MaterialListComponent implements AfterViewInit {
   private dataService = inject(DataService);
