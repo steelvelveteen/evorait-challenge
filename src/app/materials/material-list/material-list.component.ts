@@ -1,12 +1,4 @@
-import {
-  AfterViewInit,
-  Component,
-  ElementRef,
-  ViewChild,
-  computed,
-  inject,
-  signal,
-} from '@angular/core';
+import { AfterViewInit, Component, ElementRef, ViewChild, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DataService } from '../../services/http/data.service';
 import { Material } from '../../domain/material.interface';
@@ -36,7 +28,7 @@ export class MaterialListComponent implements AfterViewInit {
     fromEvent(this.filterInputRef?.nativeElement, 'keyup')
       .pipe(
         map((event: any) => {
-          return event.target.value.trim();
+          return (event.target as HTMLInputElement).value.trim();
         }),
         distinctUntilChanged()
       )
@@ -56,18 +48,24 @@ export class MaterialListComponent implements AfterViewInit {
 
   bookMaterial(event: Event, quantity: string, material: Material): void {
     event.stopPropagation();
+    if (!quantity) {
+      // Display some warning
+      return;
+    }
+    if (parseInt(quantity) > parseInt(material.Available)) {
+      // Display some error
+      return;
+    }
 
     this.dataService.bookMaterial(material, quantity);
   }
 
   /**
-   * prevents user from entering non-numerical values
-   *
+   * Prevents user from entering non-numerical values
    * @param event the event coming from book input
    */
   handleBookInputChange(event: Event): void {
-    const inputElement = event.target as HTMLInputElement;
-    const inputValue = inputElement.value.trim();
+    const inputValue = (event.target as HTMLInputElement).value.trim();
     if (/^\d+$/.test(inputValue)) {
     } else {
       if (this.quantityInputRef) {
@@ -77,11 +75,6 @@ export class MaterialListComponent implements AfterViewInit {
   }
 
   private filterMaterialsList(terms: string): void {
-    // this.filteredMaterials = computed(() => {
-    //   return this.materials().filter(item =>
-    //     item.DescTxt.toLowerCase().includes(terms.toLowerCase())
-    //   );
-    // });
     this.filteredMaterials = this.materials().filter(item =>
       item.DescTxt.toLowerCase().includes(terms.toLowerCase())
     );
