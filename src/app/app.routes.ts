@@ -15,13 +15,6 @@ export const routes: Routes = [
         x => x.MaterialListComponent
       ),
   },
-  // {
-  //   path: 'materials',
-  //   loadComponent: () =>
-  //     import('./materials/material-shell/material-shell.component').then(
-  //       x => x.MaterialShellComponent
-  //     ),
-  // },
   {
     path: 'details',
     loadComponent: () =>
