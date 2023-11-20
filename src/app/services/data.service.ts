@@ -94,9 +94,7 @@ export class DataService {
   }
 
   getNextMaterial(): void {
-    // this.selectedIndex.set(this.selectedIndex() + 1);
-    // console.log(this.selectedIndex());
-    // this.selectedMaterial.set(this.materials()[this.selectedIndex()]);
-    // this.storageService.saveIndexSelectedMaterial(this.selectedIndex());
+    this.selectedIndex += 1;
+    this.storageService.saveIndexSelectedMaterial(this.selectedIndex);
   }
 }

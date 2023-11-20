@@ -45,5 +45,7 @@ export class MaterialItemDetailsComponent implements OnInit {
 
   nextMaterial(): void {
     this.dataService.getNextMaterial();
+    this.dataService.getStoredSelectedMaterial();
+    this.material = this.dataService.selectedMaterial;
   }
 }
