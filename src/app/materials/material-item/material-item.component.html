@@ -6,13 +6,7 @@
   <td>{{ material.Available }}</td>
 </div>
 <div class="book-quantity-container">
-  <input
-    #quantityInputRef
-    matInput
-    type="text"
-    placeholder="Enter quantity"
-    (input)="handleBookInputChange($event)"
-  />
+  <input #quantityInputRef matInput type="text" placeholder="Enter quantity" />
   <button
     [disabled]="isBookBtnDisabled"
     mat-raised-button

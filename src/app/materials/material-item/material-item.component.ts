@@ -28,7 +28,15 @@ export class MaterialItemComponent implements AfterViewInit {
     fromEvent(this.quantityInputRef?.nativeElement, 'input')
       .pipe(
         map((event: any) => {
-          return event.target.value.trim();
+          const inputValue = (event.target as HTMLInputElement).value.trim();
+          // Prevents user from entering non-numerical values
+          if (/^\d+$/.test(inputValue)) {
+          } else {
+            if (this.quantityInputRef) {
+              this.quantityInputRef.nativeElement.value = '';
+            }
+          }
+          return inputValue;
         })
       )
       .subscribe(quantity => {
@@ -42,19 +50,6 @@ export class MaterialItemComponent implements AfterViewInit {
   selectMaterial(material: Material): void {
     this.dataService.selectMaterial(material);
     this.router.navigate(['details']);
-  }
-  /**
-   * Prevents user from entering non-numerical values
-   * @param event the event coming from book input
-   */
-  handleBookInputChange(event: Event): void {
-    const inputValue = (event.target as HTMLInputElement).value.trim();
-    if (/^\d+$/.test(inputValue)) {
-    } else {
-      if (this.quantityInputRef) {
-        this.quantityInputRef.nativeElement.value = '';
-      }
-    }
   }
 
   bookMaterial(quantity: string, material: Material): void {
