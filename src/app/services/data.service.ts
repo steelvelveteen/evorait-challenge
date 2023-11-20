@@ -80,9 +80,9 @@ export class DataService {
   /**
    * Prevents user from booking a quantity greater than
    * what's available
-   * @param quantity
-   * @param material
-   * @returns
+   * @param quantity the quantity its intended to book
+   * @param material the material for which user wants to book
+   * @returns boolean wehether there is availablity
    */
   checkAvailability(quantity: string, material: Material): boolean {
     if (parseInt(quantity) > parseInt(material.Available)) {
@@ -93,6 +93,10 @@ export class DataService {
     }
   }
 
+  /**
+   * Displays next material in the list
+   * @returns void
+   */
   getNextMaterial(): void {
     const tempIndex = this.selectedIndex + 1;
     if (tempIndex === this.materials().length) return;
@@ -100,6 +104,10 @@ export class DataService {
     this.storageService.saveIndexSelectedMaterial(LS_ITEM_NAME.Index, this.selectedIndex);
   }
 
+  /**
+   * Displays previous material in the list
+   * @returns void
+   */
   getPreviousMaterial(): void {
     const tempIndex = this.selectedIndex - 1;
     if (tempIndex < 0) return;

@@ -28,6 +28,8 @@ export class MaterialItemDetailsComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
+    this.quantityInputRef?.nativeElement.focus();
+
     // Listens for quantity inputs for availablity
     // Disables button and displays error message
     fromEvent(this.quantityInputRef?.nativeElement, 'input')
