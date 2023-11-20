@@ -1,18 +1,19 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { DataService } from '../../services/data.service';
-import { MaterialListComponent } from '../material-list/material-list.component';
-import { MaterialItemDetailsComponent } from '../material-item-details/material-item-details.component';
+import { Router } from '@angular/router';
+import { MaterialModule } from '../../material.module';
 
 @Component({
   selector: 'app-material-shell',
   standalone: true,
   templateUrl: './material-shell.component.html',
   styleUrl: './material-shell.component.scss',
-  imports: [CommonModule, MaterialListComponent, MaterialItemDetailsComponent],
+  imports: [CommonModule, MaterialModule],
 })
 export class MaterialShellComponent {
-  private dataService = inject(DataService);
+  private router = inject(Router);
 
-  materials = this.dataService.materials;
+  goToMaterialsList = (): void => {
+    this.router.navigate(['materials']);
+  };
 }

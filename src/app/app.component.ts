@@ -12,10 +12,4 @@ import { MaterialModule } from './material.module';
 })
 export class AppComponent {
   title = 'EvoraIT';
-
-  private router = inject(Router);
-
-  goToMaterialsList = (): void => {
-    this.router.navigate(['materials']);
-  };
 }

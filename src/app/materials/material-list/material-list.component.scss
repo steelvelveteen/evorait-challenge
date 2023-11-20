@@ -1,18 +1,22 @@
-.material-list-container {
-  tbody {
-    display: flex;
-    flex-direction: column;
-  }
+:host {
+  display: flex;
+  justify-content: center;
+  .material-list-container {
+    tbody {
+      display: flex;
+      flex-direction: column;
+    }
 
-  th {
-    text-align: left;
-    padding: 0.2rem 0.75rem;
-    margin: 0;
-  }
+    th {
+      text-align: left;
+      padding: 0.2rem 0.75rem;
+      margin: 0;
+    }
 
-  input {
-    margin-left: 0.5rem;
-    padding: 0.5rem;
-    outline: none;
+    input {
+      margin-left: 0.5rem;
+      padding: 0.5rem;
+      outline: none;
+    }
   }
 }

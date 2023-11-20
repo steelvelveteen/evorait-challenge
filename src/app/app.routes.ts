@@ -2,12 +2,26 @@ import { Routes } from '@angular/router';
 
 export const routes: Routes = [
   {
-    path: 'materials',
+    path: '',
     loadComponent: () =>
       import('./materials/material-shell/material-shell.component').then(
         x => x.MaterialShellComponent
       ),
   },
+  {
+    path: 'materials',
+    loadComponent: () =>
+      import('./materials/material-list/material-list.component').then(
+        x => x.MaterialListComponent
+      ),
+  },
+  // {
+  //   path: 'materials',
+  //   loadComponent: () =>
+  //     import('./materials/material-shell/material-shell.component').then(
+  //       x => x.MaterialShellComponent
+  //     ),
+  // },
   {
     path: 'details',
     loadComponent: () =>
