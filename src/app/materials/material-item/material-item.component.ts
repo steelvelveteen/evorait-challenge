@@ -25,6 +25,7 @@ export class MaterialItemComponent implements AfterViewInit {
   ngAfterViewInit(): void {
     // Listens for quantity inputs for availablity
     // Disables button and displays error message
+    // if quantity is greater than available
     fromEvent(this.quantityInputRef?.nativeElement, 'input')
       .pipe(
         map((event: any) => {
@@ -53,10 +54,8 @@ export class MaterialItemComponent implements AfterViewInit {
   }
 
   bookMaterial(quantity: string, material: Material): void {
-    if (!quantity) {
-      // Display some warning
-      return;
-    }
+    if (!quantity) return;
+
     const isAvailable = this.dataService.checkAvailability(quantity, material);
     if (isAvailable) {
       this.dataService.bookMaterial(material, quantity);

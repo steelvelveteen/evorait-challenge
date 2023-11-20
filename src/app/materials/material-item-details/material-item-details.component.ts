@@ -44,10 +44,7 @@ export class MaterialItemDetailsComponent implements OnInit, AfterViewInit {
 
   bookMaterial(quantity: string, material: Material | null): void {
     // Prevents user to book quantity greater than what's available
-    if (!quantity) {
-      // Display some warning
-      return;
-    }
+    if (!quantity) return;
 
     const isAvailable = this.dataService.checkAvailability(quantity, material as Material);
 
