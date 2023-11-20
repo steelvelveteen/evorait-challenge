@@ -23,6 +23,8 @@ export class MaterialItemComponent implements AfterViewInit {
   isBookBtnDisabled = false;
 
   ngAfterViewInit(): void {
+    // Listens for quantity inputs for availablity
+    // Disables button and displays error message
     fromEvent(this.quantityInputRef?.nativeElement, 'input')
       .pipe(
         map((event: any) => {
