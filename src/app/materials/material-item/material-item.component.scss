@@ -29,5 +29,11 @@
   }
   .book-quantity-container {
     display: flex;
+    align-items: baseline;
+    .availability-error {
+      margin-left: 0.5rem;
+      color: red;
+      font-size: 14px;
+    }
   }
 }

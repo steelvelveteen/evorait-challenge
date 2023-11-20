@@ -14,6 +14,7 @@
     (input)="handleBookInputChange($event)"
   />
   <button
+    [disabled]="isBookBtnDisabled"
     mat-raised-button
     color="primary"
     type="button"
@@ -22,4 +23,7 @@
   >
     Book
   </button>
+  <div *ngIf="isBookBtnDisabled" class="availability-error">
+    You are trying to book more than what's available. Max quantity {{ material.Available }}
+  </div>
 </div>
