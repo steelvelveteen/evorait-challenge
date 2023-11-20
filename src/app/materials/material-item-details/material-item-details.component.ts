@@ -23,7 +23,6 @@ export class MaterialItemDetailsComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.dataService.getStoredSelectedMaterial();
-
     this.material = this.dataService.selectedMaterial;
   }
 
@@ -63,12 +62,12 @@ export class MaterialItemDetailsComponent implements OnInit, AfterViewInit {
   }
 
   nextMaterial(): void {
-    this.dataService.getNextMaterial();
+    this.dataService.adjustIndexAndMaterial(1);
     this.material = this.dataService.selectedMaterial;
   }
 
   previousMaterial(): void {
-    this.dataService.getPreviousMaterial();
+    this.dataService.adjustIndexAndMaterial(-1);
     this.material = this.dataService.selectedMaterial;
   }
 }

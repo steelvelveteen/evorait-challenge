@@ -46,7 +46,6 @@ export class DataService {
    * @param quantity
    */
   bookMaterial(material: Material, quantity: string): void {
-    // const indexMaterial = this.materials().indexOf(material);
     this.selectedIndex = this.materials().indexOf(material);
     this.selectedMaterial = this.materials()[this.selectedIndex];
 
@@ -82,43 +81,26 @@ export class DataService {
    * what's available
    * @param quantity the quantity its intended to book
    * @param material the material for which user wants to book
-   * @returns boolean wehether there is availablity
+   * @returns boolean if available
    */
   checkAvailability(quantity: string, material: Material): boolean {
-    if (parseInt(quantity) > parseInt(material.Available)) {
-      // Display some error
-      return false;
-    } else {
-      return true;
-    }
+    return parseInt(quantity) <= parseInt(material.Available);
   }
 
   /**
-   * Displays next material in the list
+   * Adjusts the selected index and updates the stored selected material
+   * @param delta - The change in index (positive or negative)
    * @returns void
    */
-  getNextMaterial(): void {
+  adjustIndexAndMaterial(delta: number): void {
     if (!this.selectedIndex) {
       this.selectedIndex = this.storageService.getSavedIndex();
     }
-    const tempIndex = this.selectedIndex + 1;
-    if (tempIndex === this.materials().length) return;
-    this.selectedIndex += 1;
-    this.storageService.saveIndexSelectedMaterial(LS_ITEM_NAME.Index, this.selectedIndex);
-    this.getStoredSelectedMaterial();
-  }
 
-  /**
-   * Displays previous material in the list
-   * @returns void
-   */
-  getPreviousMaterial(): void {
-    if (!this.selectedIndex) {
-      this.selectedIndex = this.storageService.getSavedIndex();
-    }
-    const tempIndex = this.selectedIndex - 1;
-    if (tempIndex < 0) return;
-    this.selectedIndex -= 1;
+    const tempIndex = this.selectedIndex + delta;
+    if (tempIndex < 0 || tempIndex >= this.materials().length) return;
+
+    this.selectedIndex += delta;
     this.storageService.saveIndexSelectedMaterial(LS_ITEM_NAME.Index, this.selectedIndex);
     this.getStoredSelectedMaterial();
   }
