@@ -72,7 +72,7 @@ export class DataService {
 
   getStoredSelectedMaterial(): void {
     const index = this.storageService.getSavedIndex();
-    if (index) {
+    if (typeof index === 'number') {
       this.selectedMaterial = this.materials()[index];
     }
   }
@@ -91,5 +91,12 @@ export class DataService {
     } else {
       return true;
     }
+  }
+
+  getNextMaterial(): void {
+    // this.selectedIndex.set(this.selectedIndex() + 1);
+    // console.log(this.selectedIndex());
+    // this.selectedMaterial.set(this.materials()[this.selectedIndex()]);
+    // this.storageService.saveIndexSelectedMaterial(this.selectedIndex());
   }
 }
