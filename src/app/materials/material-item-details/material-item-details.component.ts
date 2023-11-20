@@ -42,4 +42,8 @@ export class MaterialItemDetailsComponent implements OnInit {
   returnToMaterialsPage(): void {
     this.router.navigate(['materials']);
   }
+
+  nextMaterial(): void {
+    this.dataService.getNextMaterial();
+  }
 }
