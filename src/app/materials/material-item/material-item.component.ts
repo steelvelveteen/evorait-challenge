@@ -30,18 +30,30 @@ export class MaterialItemComponent implements AfterViewInit {
       .pipe(
         map((event: any) => {
           const inputValue = (event.target as HTMLInputElement).value.trim();
-          // Prevents user from entering non-numerical values
-          if (/^\d+$/.test(inputValue)) {
-          } else {
-            if (this.quantityInputRef) {
-              this.quantityInputRef.nativeElement.value = '';
-            }
+
+          // Check if the input value is empty
+          const isInputEmpty = inputValue === '';
+
+          // Handle backspace explicitly
+          // Proudly provided by chatGPT
+          if (event.inputType === 'deleteContentBackward' && isInputEmpty) {
+            this.isBookBtnDisabled = false;
+            return inputValue;
           }
+
+          // Prevents user from entering non-numerical values
+          if (!/^\d+$/.test(inputValue) && this.quantityInputRef) {
+            this.quantityInputRef.nativeElement.value = '';
+          }
+
           return inputValue;
         })
       )
       .subscribe(quantity => {
-        this.isBookBtnDisabled = !this.dataService.checkAvailability(quantity, this.material);
+        // Explicitly check if the input value is not empty
+        if (quantity !== '') {
+          this.isBookBtnDisabled = !this.dataService.checkAvailability(quantity, this.material);
+        }
       });
   }
   /**
