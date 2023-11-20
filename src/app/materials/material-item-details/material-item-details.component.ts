@@ -48,4 +48,10 @@ export class MaterialItemDetailsComponent implements OnInit {
     this.dataService.getStoredSelectedMaterial();
     this.material = this.dataService.selectedMaterial;
   }
+
+  previousMaterial(): void {
+    this.dataService.getPreviousMaterial();
+    this.dataService.getStoredSelectedMaterial();
+    this.material = this.dataService.selectedMaterial;
+  }
 }

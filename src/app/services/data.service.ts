@@ -94,7 +94,16 @@ export class DataService {
   }
 
   getNextMaterial(): void {
+    const tempIndex = this.selectedIndex + 1;
+    if (tempIndex === this.materials().length) return;
     this.selectedIndex += 1;
+    this.storageService.saveIndexSelectedMaterial(this.selectedIndex);
+  }
+
+  getPreviousMaterial(): void {
+    const tempIndex = this.selectedIndex - 1;
+    if (tempIndex < 0) return;
+    this.selectedIndex -= 1;
     this.storageService.saveIndexSelectedMaterial(this.selectedIndex);
   }
 }

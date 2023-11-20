@@ -42,7 +42,12 @@
       Return to Materials list
     </button>
   </div>
-  <button mat-raised-button color="primary" routerLink="materials" (click)="nextMaterial()">
-    Next
-  </button>
+  <div class="materials-nav-buttons">
+    <button mat-raised-button color="primary" routerLink="materials" (click)="previousMaterial()">
+      Previous
+    </button>
+    <button mat-raised-button color="primary" routerLink="materials" (click)="nextMaterial()">
+      Next
+    </button>
+  </div>
 </div>
