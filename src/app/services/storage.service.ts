@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Material } from '../../domain/material.interface';
+import { Material } from '../domain/material.interface';
 import { Observable, of } from 'rxjs';
 
 @Injectable({

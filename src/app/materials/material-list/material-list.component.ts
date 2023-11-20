@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, ElementRef, ViewChild, computed, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { DataService } from '../../services/http/data.service';
+import { DataService } from '../../services/data.service';
 import { distinctUntilChanged, fromEvent, map } from 'rxjs';
 import { MaterialModule } from '../../material.module';
 import { MaterialItemComponent } from '../material-item/material-item.component';

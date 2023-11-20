@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { DataService } from '../../services/http/data.service';
+import { DataService } from '../../services/data.service';
 import { MaterialListComponent } from '../material-list/material-list.component';
 import { MaterialItemDetailsComponent } from '../material-item-details/material-item-details.component';
 

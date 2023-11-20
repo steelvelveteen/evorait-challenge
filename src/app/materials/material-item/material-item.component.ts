@@ -1,6 +1,6 @@
 import { Component, ElementRef, Input, ViewChild, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { DataService } from '../../services/http/data.service';
+import { DataService } from '../../services/data.service';
 import { Material } from '../../domain/material.interface';
 import { Router } from '@angular/router';
 import { MaterialModule } from '../../material.module';

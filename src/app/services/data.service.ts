@@ -1,10 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject, signal } from '@angular/core';
 import { Observable, map, mergeMap, of, tap } from 'rxjs';
-import { DataSet, Material } from '../../domain/material.interface';
+import { DataSet, Material } from '../domain/material.interface';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { StorageService } from '../storage/storage.service';
-import { LS_ITEM_NAME } from '../../domain/local-storage.enum';
+import { StorageService } from './storage.service';
+import { LS_ITEM_NAME } from '../domain/local-storage.enum';
 
 const JSONUrl = '/assets/MatPricingSet.json';
 
