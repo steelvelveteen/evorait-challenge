@@ -46,8 +46,9 @@ export class DataService {
    * @param quantity
    */
   bookMaterial(material: Material, quantity: string): void {
-    const indexMaterial = this.materials().indexOf(material);
-    this.selectedMaterial = this.materials()[indexMaterial];
+    // const indexMaterial = this.materials().indexOf(material);
+    this.selectedIndex = this.materials().indexOf(material);
+    this.selectedMaterial = this.materials()[this.selectedIndex];
 
     if (this.selectedMaterial) {
       this.selectedMaterial.Quantity = (
