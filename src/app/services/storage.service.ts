@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Material } from '../domain/material.interface';
 import { Observable, of } from 'rxjs';
+import { LS_ITEM_NAME } from '../domain/local-storage.enum';
 
 @Injectable({
   providedIn: 'root',
@@ -18,11 +19,11 @@ export class StorageService {
     localStorage.setItem(itemName, JSON.stringify(index));
   }
 
-  getSavedIndex(): number | null {
-    const savedIndex = localStorage.getItem('index');
+  getSavedIndex(): number {
+    const savedIndex = localStorage.getItem(LS_ITEM_NAME.Index);
     if (savedIndex) {
       const index = parseInt(savedIndex, 10);
       return index;
-    } else return null;
+    } else return 0;
   }
 }

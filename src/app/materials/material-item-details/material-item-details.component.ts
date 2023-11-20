@@ -64,13 +64,11 @@ export class MaterialItemDetailsComponent implements OnInit, AfterViewInit {
 
   nextMaterial(): void {
     this.dataService.getNextMaterial();
-    this.dataService.getStoredSelectedMaterial();
     this.material = this.dataService.selectedMaterial;
   }
 
   previousMaterial(): void {
     this.dataService.getPreviousMaterial();
-    this.dataService.getStoredSelectedMaterial();
     this.material = this.dataService.selectedMaterial;
   }
 }

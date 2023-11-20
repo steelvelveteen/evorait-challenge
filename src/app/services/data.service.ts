@@ -98,10 +98,14 @@ export class DataService {
    * @returns void
    */
   getNextMaterial(): void {
+    if (!this.selectedIndex) {
+      this.selectedIndex = this.storageService.getSavedIndex();
+    }
     const tempIndex = this.selectedIndex + 1;
     if (tempIndex === this.materials().length) return;
     this.selectedIndex += 1;
     this.storageService.saveIndexSelectedMaterial(LS_ITEM_NAME.Index, this.selectedIndex);
+    this.getStoredSelectedMaterial();
   }
 
   /**
@@ -109,9 +113,13 @@ export class DataService {
    * @returns void
    */
   getPreviousMaterial(): void {
+    if (!this.selectedIndex) {
+      this.selectedIndex = this.storageService.getSavedIndex();
+    }
     const tempIndex = this.selectedIndex - 1;
     if (tempIndex < 0) return;
     this.selectedIndex -= 1;
     this.storageService.saveIndexSelectedMaterial(LS_ITEM_NAME.Index, this.selectedIndex);
+    this.getStoredSelectedMaterial();
   }
 }
