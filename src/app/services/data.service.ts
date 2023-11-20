@@ -65,7 +65,7 @@ export class DataService {
 
   selectMaterial(material: Material): void {
     this.selectedIndex = this.materials().indexOf(material);
-    this.storageService.saveIndexSelectedMaterial(this.selectedIndex);
+    this.storageService.saveIndexSelectedMaterial(LS_ITEM_NAME.Index, this.selectedIndex);
 
     this.selectedMaterial = this.materials()[this.selectedIndex];
   }
@@ -97,13 +97,13 @@ export class DataService {
     const tempIndex = this.selectedIndex + 1;
     if (tempIndex === this.materials().length) return;
     this.selectedIndex += 1;
-    this.storageService.saveIndexSelectedMaterial(this.selectedIndex);
+    this.storageService.saveIndexSelectedMaterial(LS_ITEM_NAME.Index, this.selectedIndex);
   }
 
   getPreviousMaterial(): void {
     const tempIndex = this.selectedIndex - 1;
     if (tempIndex < 0) return;
     this.selectedIndex -= 1;
-    this.storageService.saveIndexSelectedMaterial(this.selectedIndex);
+    this.storageService.saveIndexSelectedMaterial(LS_ITEM_NAME.Index, this.selectedIndex);
   }
 }

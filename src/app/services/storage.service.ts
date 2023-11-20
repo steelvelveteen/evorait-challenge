@@ -14,13 +14,8 @@ export class StorageService {
     return of(JSON.parse(localStorage.getItem(itemName)!));
   }
 
-  getSingle(): Material | null {
-    const localStorageItem = localStorage.getItem('selected-material');
-    return localStorageItem ? (JSON.parse(localStorageItem) as Material) : null;
-  }
-
-  saveIndexSelectedMaterial(index: number): void {
-    localStorage.setItem('index', JSON.stringify(index));
+  saveIndexSelectedMaterial(itemName: string, index: number): void {
+    localStorage.setItem(itemName, JSON.stringify(index));
   }
 
   getSavedIndex(): number | null {
