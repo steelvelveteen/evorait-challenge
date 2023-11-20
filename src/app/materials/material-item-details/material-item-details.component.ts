@@ -34,23 +34,44 @@ export class MaterialItemDetailsComponent implements OnInit, AfterViewInit {
     fromEvent(this.quantityInputRef?.nativeElement, 'input')
       .pipe(
         map((event: any) => {
-          return event.target.value.trim();
+          const inputValue = (event.target as HTMLInputElement).value.trim();
+
+          // Check if the input value is empty
+          const isInputEmpty = inputValue === '';
+
+          // Handle backspace explicitly
+          if (event.inputType === 'deleteContentBackward' && isInputEmpty) {
+            this.isBookBtnDisabled = false;
+            return inputValue;
+          }
+
+          // Prevents user from entering non-numerical values
+          if (!/^\d+$/.test(inputValue) && this.quantityInputRef) {
+            this.quantityInputRef.nativeElement.value = '';
+          }
+
+          return inputValue;
         })
       )
       .subscribe(quantity => {
-        this.isBookBtnDisabled = !this.dataService.checkAvailability(quantity, this.material);
+        // Explicitly check if the input value is not empty
+        if (quantity !== '') {
+          this.isBookBtnDisabled = !this.dataService.checkAvailability(quantity, this.material);
+        }
       });
   }
 
-  bookMaterial(quantity: string, material: Material | null): void {
-    // Prevents user to book quantity greater than what's available
-    if (!quantity) return;
-
+  bookMaterial(quantity: string, material: Material): void {
     const isAvailable = this.dataService.checkAvailability(quantity, material as Material);
 
     // Book material
     if (isAvailable) {
-      this.dataService.bookMaterial(material as Material, quantity);
+      this.dataService.bookMaterial(material, quantity);
+    }
+
+    // Reset the input field after booking
+    if (this.quantityInputRef) {
+      this.quantityInputRef.nativeElement.value = '';
     }
   }
 

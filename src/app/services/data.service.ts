@@ -42,13 +42,15 @@ export class DataService {
 
   /**
    * Books material and updates list information
-   * @param material
-   * @param quantity
+   * @param quantity number of items to book
+   * @param material the material user wants to book
    */
   bookMaterial(material: Material, quantity: string): void {
     this.selectedIndex = this.materials().indexOf(material);
     this.selectedMaterial = this.materials()[this.selectedIndex];
 
+    // Updates relevant quantity and availability properties
+    // of the selected material
     if (this.selectedMaterial) {
       this.selectedMaterial.Quantity = (
         parseInt(this.selectedMaterial.Quantity) + parseInt(quantity)
@@ -58,6 +60,7 @@ export class DataService {
       ).toString();
     }
 
+    // Updates materials list
     this.materialsList.update(() => [...this.materials(), material]);
     this.storageService.save(LS_ITEM_NAME.MaterialsList, this.materials());
   }
@@ -88,7 +91,8 @@ export class DataService {
   }
 
   /**
-   * Adjusts the selected index and updates the stored selected material
+   * Next and Previous buttons: Adjusts the selected
+   * index and updates the stored selected material
    * @param delta - The change in index (positive or negative)
    * @returns void
    */
