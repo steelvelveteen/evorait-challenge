@@ -18,4 +18,16 @@ export class StorageService {
     const localStorageItem = localStorage.getItem('selected-material');
     return localStorageItem ? (JSON.parse(localStorageItem) as Material) : null;
   }
+
+  saveIndexSelectedMaterial(index: number): void {
+    localStorage.setItem('index', JSON.stringify(index));
+  }
+
+  getSavedIndex(): number | null {
+    const savedIndex = localStorage.getItem('index');
+    if (savedIndex) {
+      const index = parseInt(savedIndex, 10);
+      return index;
+    } else return null;
+  }
 }

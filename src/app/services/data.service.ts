@@ -37,7 +37,7 @@ export class DataService {
     initialValue: [] as Material[],
   });
   materialsList = signal(this.materials());
-  selectedMaterial = signal<Material | null>(null);
+  selectedMaterial!: Material;
   selectedIndex!: number;
 
   /**
@@ -47,11 +47,15 @@ export class DataService {
    */
   bookMaterial(material: Material, quantity: string): void {
     const indexMaterial = this.materials().indexOf(material);
-    const foundMaterial = this.materials()[indexMaterial];
+    this.selectedMaterial = this.materials()[indexMaterial];
 
-    if (foundMaterial) {
-      foundMaterial.Quantity = (parseInt(foundMaterial.Quantity) + parseInt(quantity)).toString();
-      foundMaterial.Available = (parseInt(foundMaterial.Available) - parseInt(quantity)).toString();
+    if (this.selectedMaterial) {
+      this.selectedMaterial.Quantity = (
+        parseInt(this.selectedMaterial.Quantity) + parseInt(quantity)
+      ).toString();
+      this.selectedMaterial.Available = (
+        parseInt(this.selectedMaterial.Available) - parseInt(quantity)
+      ).toString();
     }
 
     this.materialsList.update(() => [...this.materials(), material]);
@@ -59,13 +63,17 @@ export class DataService {
   }
 
   selectMaterial(material: Material): void {
-    this.selectedMaterial.set(material);
-    this.storageService.save(LS_ITEM_NAME.SelectedMaterial, material);
+    this.selectedIndex = this.materials().indexOf(material);
+    this.storageService.saveIndexSelectedMaterial(this.selectedIndex);
+
+    this.selectedMaterial = this.materials()[this.selectedIndex];
   }
 
-  getSelectedMaterial(): void {
-    const selectedMaterial = this.storageService.getSingle();
-    this.selectedMaterial.set(selectedMaterial);
+  getStoredSelectedMaterial(): void {
+    const index = this.storageService.getSavedIndex();
+    if (index) {
+      this.selectedMaterial = this.materials()[index];
+    }
   }
 
   /**

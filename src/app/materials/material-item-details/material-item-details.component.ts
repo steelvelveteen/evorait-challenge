@@ -16,17 +16,12 @@ export class MaterialItemDetailsComponent implements OnInit {
   private dataService = inject(DataService);
   private router = inject(Router);
 
-  // selectedMaterial = this.dataService.selectedMaterial;
   material!: Material;
 
-  constructor() {
-    this.dataService.getSelectedMaterial();
-    console.log(this.dataService.selectedIndex);
-  }
-
   ngOnInit(): void {
-    const index = this.dataService.selectedIndex;
-    this.material = this.dataService.materials()[index];
+    this.dataService.getStoredSelectedMaterial();
+
+    this.material = this.dataService.selectedMaterial;
   }
 
   bookMaterial(quantity: string, material: Material | null): void {

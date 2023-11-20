@@ -25,10 +25,8 @@ export class MaterialItemComponent {
    * @param materialItem the selected item from the list
    */
   selectMaterial(material: Material): void {
-    const indexMaterial = this.dataService.materials().indexOf(material);
-    this.dataService.selectedIndex = indexMaterial;
+    this.dataService.selectMaterial(material);
     this.router.navigate(['details']);
-    // this.dataService.selectMaterial(materialItem);
   }
   /**
    * Prevents user from entering non-numerical values
