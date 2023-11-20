@@ -38,6 +38,7 @@ export class DataService {
   });
   materialsList = signal(this.materials());
   selectedMaterial = signal<Material | null>(null);
+  selectedIndex!: number;
 
   /**
    * Books material and updates list information

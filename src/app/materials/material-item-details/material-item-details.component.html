@@ -1,30 +1,24 @@
-<div *ngIf="selectedMaterial()" class="material-details-container">
+<div *ngIf="material" class="material-details-container">
   <div>
-    <div class="item-detail-header">Detailed information for {{ selectedMaterial()?.DescTxt }}</div>
-    <div><span class="item-key">Description: </span>{{ selectedMaterial()?.DescTxt }}</div>
-    <div><span class="item-key">Quantity: </span>{{ selectedMaterial()?.Quantity }}</div>
-    <div><span class="item-key">Material: </span>{{ selectedMaterial()?.Material }}</div>
-    <div><span class="item-key">Customer Price: </span>{{ selectedMaterial()?.CustomerPrice }}</div>
+    <div class="item-detail-header">Detailed information for {{ material.DescTxt }}</div>
+    <div><span class="item-key">Description: </span>{{ material.DescTxt }}</div>
+    <div><span class="item-key">Quantity: </span>{{ material.Quantity }}</div>
+    <div><span class="item-key">Material: </span>{{ material.Material }}</div>
+    <div><span class="item-key">Customer Price: </span>{{ material.CustomerPrice }}</div>
+    <div><span class="item-key">Customer Currency: </span>{{ material.CustomerCurrency }}</div>
+    <div><span class="item-key">Repair Price: </span>{{ material.RepairPrice }}</div>
+    <div><span class="item-key">Repair Currency: </span>{{ material.RepairCurrency }}</div>
+    <div><span class="item-key">Available: </span>{{ material.Available }}</div>
+    <div><span class="item-key">Material Status: </span>{{ material.MatStatus }}</div>
+    <div><span class="item-key">Storage Location: </span>{{ material.StorageLoc }}</div>
     <div>
-      <span class="item-key">Customer Currency: </span>{{ selectedMaterial()?.CustomerCurrency }}
+      <span class="item-key">Storeage Location Description: </span>{{ material.StorageLocDesc }}
     </div>
-    <div><span class="item-key">Repair Price: </span>{{ selectedMaterial()?.RepairPrice }}</div>
+    <div><span class="item-key">NDF Quote: </span>{{ material.NDFQuote }}</div>
+    <div><span class="item-key">NDF Counter: </span>{{ material.NDFCounter }}</div>
+    <div><span class="item-key">TS Percentage: </span>{{ material.TSPercentage }}</div>
     <div>
-      <span class="item-key">Repair Currency: </span>{{ selectedMaterial()?.RepairCurrency }}
-    </div>
-    <div><span class="item-key">Available: </span>{{ selectedMaterial()?.Available }}</div>
-    <div><span class="item-key">Material Status: </span>{{ selectedMaterial()?.MatStatus }}</div>
-    <div><span class="item-key">Storage Location: </span>{{ selectedMaterial()?.StorageLoc }}</div>
-    <div>
-      <span class="item-key">Storeage Location Description: </span
-      >{{ selectedMaterial()?.StorageLocDesc }}
-    </div>
-    <div><span class="item-key">NDF Quote: </span>{{ selectedMaterial()?.NDFQuote }}</div>
-    <div><span class="item-key">NDF Counter: </span>{{ selectedMaterial()?.NDFCounter }}</div>
-    <div><span class="item-key">TS Percentage: </span>{{ selectedMaterial()?.TSPercentage }}</div>
-    <div>
-      <span class="item-key">TS Percentage Counter: </span
-      >{{ selectedMaterial()?.TSPercentageCounter }}
+      <span class="item-key">TS Percentage Counter: </span>{{ material.TSPercentageCounter }}
     </div>
 
     <div class="book-quantity-container">
@@ -34,7 +28,7 @@
         color="primary"
         type="button"
         class="btn btn-primary btn-small"
-        (click)="bookMaterial(quantityInputRef.value, selectedMaterial())"
+        (click)="bookMaterial(quantityInputRef.value, material)"
       >
         Book
       </button>

@@ -24,9 +24,11 @@ export class MaterialItemComponent {
    * Emits the material selected for displaying its details
    * @param materialItem the selected item from the list
    */
-  selectMaterial(materialItem: Material): void {
+  selectMaterial(material: Material): void {
+    const indexMaterial = this.dataService.materials().indexOf(material);
+    this.dataService.selectedIndex = indexMaterial;
     this.router.navigate(['details']);
-    this.dataService.selectMaterial(materialItem);
+    // this.dataService.selectMaterial(materialItem);
   }
   /**
    * Prevents user from entering non-numerical values

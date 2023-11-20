@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DataService } from '../../services/data.service';
 import { Router } from '@angular/router';
@@ -12,14 +12,21 @@ import { Material } from '../../domain/material.interface';
   styleUrl: './material-item-details.component.scss',
   imports: [CommonModule, MaterialModule],
 })
-export class MaterialItemDetailsComponent {
+export class MaterialItemDetailsComponent implements OnInit {
   private dataService = inject(DataService);
   private router = inject(Router);
 
-  selectedMaterial = this.dataService.selectedMaterial;
+  // selectedMaterial = this.dataService.selectedMaterial;
+  material!: Material;
 
   constructor() {
     this.dataService.getSelectedMaterial();
+    console.log(this.dataService.selectedIndex);
+  }
+
+  ngOnInit(): void {
+    const index = this.dataService.selectedIndex;
+    this.material = this.dataService.materials()[index];
   }
 
   bookMaterial(quantity: string, material: Material | null): void {
