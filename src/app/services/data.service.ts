@@ -45,7 +45,8 @@ export class DataService {
    * @param quantity
    */
   bookMaterial(material: Material, quantity: string): void {
-    const foundMaterial = this.materials().find(item => item.DescTxt === material.DescTxt);
+    const indexMaterial = this.materials().indexOf(material);
+    const foundMaterial = this.materials()[indexMaterial];
 
     if (foundMaterial) {
       foundMaterial.Quantity = (parseInt(foundMaterial.Quantity) + parseInt(quantity)).toString();
