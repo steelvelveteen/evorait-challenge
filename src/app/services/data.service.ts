@@ -49,12 +49,13 @@ export class DataService {
     this.selectedIndex = this.materials().indexOf(material);
     this.selectedMaterial = this.materials()[this.selectedIndex];
 
-    // Updates relevant quantity and availability properties
-    // of the selected material
     if (this.selectedMaterial) {
+      // Update quantity
       this.selectedMaterial.Quantity = (
         parseInt(this.selectedMaterial.Quantity) + parseInt(quantity)
       ).toString();
+
+      // Update available
       this.selectedMaterial.Available = (
         parseInt(this.selectedMaterial.Available) - parseInt(quantity)
       ).toString();
