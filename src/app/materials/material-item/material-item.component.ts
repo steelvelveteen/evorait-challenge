@@ -43,17 +43,13 @@ export class MaterialItemComponent {
   }
 
   bookMaterial(quantity: string, material: Material): void {
-    console.log('Quantity' + quantity);
-    console.log('Material' + material.DescTxt);
     if (!quantity) {
       // Display some warning
       return;
     }
-    if (parseInt(quantity) > parseInt(material.Available)) {
-      // Display some error
-      return;
+    const isAvailable = this.dataService.checkAvailability(quantity, material);
+    if (isAvailable) {
+      this.dataService.bookMaterial(material, quantity);
     }
-
-    this.dataService.bookMaterial(material, quantity);
   }
 }

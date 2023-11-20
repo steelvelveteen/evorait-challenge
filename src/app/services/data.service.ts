@@ -65,4 +65,20 @@ export class DataService {
     const selectedMaterial = this.storageService.getSingle();
     this.selectedMaterial.set(selectedMaterial);
   }
+
+  /**
+   * Prevents user from booking a quantity greater than
+   * what's available
+   * @param quantity
+   * @param material
+   * @returns
+   */
+  checkAvailability(quantity: string, material: Material): boolean {
+    if (parseInt(quantity) > parseInt(material.Available)) {
+      // Display some error
+      return false;
+    } else {
+      return true;
+    }
+  }
 }

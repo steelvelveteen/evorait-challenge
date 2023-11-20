@@ -28,8 +28,14 @@
     </div>
 
     <div class="book-quantity-container">
-      <input matInput #quantityInputRef type="text" placeholder="Enter quantity" pattern="[0-9]*" />
-      <button mat-raised-button color="primary" type="button" class="btn btn-primary btn-small">
+      <input #quantityInputRef matInput type="text" placeholder="Enter quantity" />
+      <button
+        mat-raised-button
+        color="primary"
+        type="button"
+        class="btn btn-primary btn-small"
+        (click)="bookMaterial(quantityInputRef.value, selectedMaterial())"
+      >
         Book
       </button>
     </div>

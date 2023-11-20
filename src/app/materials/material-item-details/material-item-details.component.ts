@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, computed, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DataService } from '../../services/data.service';
 import { Router } from '@angular/router';
@@ -22,16 +22,19 @@ export class MaterialItemDetailsComponent {
     this.dataService.getSelectedMaterial();
   }
 
-  bookMaterial(event: Event, quantity: string, material: Material | null): void {
-    event.stopPropagation();
-    // Prevents user to book without entering quantity
-    if (!material || !quantity) return;
-
+  bookMaterial(quantity: string, material: Material | null): void {
     // Prevents user to book quantity greater than what's available
-    if (quantity > material.Available) return;
+    if (!quantity) {
+      // Display some warning
+      return;
+    }
+
+    const isAvailable = this.dataService.checkAvailability(quantity, material as Material);
 
     // Book material
-    this.dataService.bookMaterial(material, quantity);
+    if (isAvailable) {
+      this.dataService.bookMaterial(material as Material, quantity);
+    }
   }
 
   returnToMaterialsPage(): void {

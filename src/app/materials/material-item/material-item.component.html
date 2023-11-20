@@ -7,11 +7,10 @@
 </div>
 <div class="book-quantity-container">
   <input
-    matInput
     #quantityInputRef
+    matInput
     type="text"
     placeholder="Enter quantity"
-    pattern="[0-9]*"
     (input)="handleBookInputChange($event)"
   />
   <button
