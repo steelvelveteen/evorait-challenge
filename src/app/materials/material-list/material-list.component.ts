@@ -2,7 +2,6 @@ import { AfterViewInit, Component, ElementRef, ViewChild, computed, inject } fro
 import { CommonModule } from '@angular/common';
 import { DataService } from '../../services/data.service';
 import { distinctUntilChanged, fromEvent, map } from 'rxjs';
-import { MaterialModule } from '../../material.module';
 import { MaterialItemComponent } from '../material-item/material-item.component';
 
 @Component({
@@ -10,7 +9,7 @@ import { MaterialItemComponent } from '../material-item/material-item.component'
   standalone: true,
   templateUrl: './material-list.component.html',
   styleUrl: './material-list.component.scss',
-  imports: [CommonModule, MaterialModule, MaterialItemComponent],
+  imports: [CommonModule, MaterialItemComponent],
 })
 export class MaterialListComponent implements AfterViewInit {
   private dataService = inject(DataService);
@@ -30,7 +29,7 @@ export class MaterialListComponent implements AfterViewInit {
         }),
         distinctUntilChanged()
       )
-      .subscribe(data => {
+      .subscribe((data: string) => {
         this.filterMaterialsList(data);
       });
   }

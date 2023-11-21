@@ -15,23 +15,25 @@ export class DataService {
   private http = inject(HttpClient);
   private storageService = inject(StorageService);
 
-  private getMaterialsList$: Observable<Material[]> = this.storageService.get('materials').pipe(
-    mergeMap(localStorageData => {
-      if (localStorageData) {
-        // If there is data in local storage, return it
-        return of(localStorageData);
-      } else {
-        // If local storage is empty, make an HTTP request
-        // and save in local storage
-        return this.http.get<DataSet>(JSONUrl).pipe(
-          map((data: DataSet) => data.d.PartSet.results),
-          tap((results: Material[]) =>
-            this.storageService.save(LS_ITEM_NAME.MaterialsList, results)
-          )
-        );
-      }
-    })
-  );
+  private getMaterialsList$: Observable<Material[]> = this.storageService
+    .get(LS_ITEM_NAME.MaterialsList)
+    .pipe(
+      mergeMap(localStorageData => {
+        if (localStorageData) {
+          // If there is data in local storage, return it
+          return of(localStorageData);
+        } else {
+          // If local storage is empty, make an HTTP request
+          // and save in local storage
+          return this.http.get<DataSet>(JSONUrl).pipe(
+            map((data: DataSet) => data.d.PartSet.results),
+            tap((results: Material[]) =>
+              this.storageService.save(LS_ITEM_NAME.MaterialsList, results)
+            )
+          );
+        }
+      })
+    );
 
   materials = toSignal<Material[], Material[]>(this.getMaterialsList$, {
     initialValue: [] as Material[],
@@ -66,15 +68,20 @@ export class DataService {
     this.storageService.save(LS_ITEM_NAME.MaterialsList, this.materials());
   }
 
+  /**
+   * Gets the selected material by index for details vieww
+   * Saves the index locally and in local storage
+   * @param material the material selected
+   */
   selectMaterial(material: Material): void {
     this.selectedIndex = this.materials().indexOf(material);
-    this.storageService.saveIndexSelectedMaterial(LS_ITEM_NAME.Index, this.selectedIndex);
+    this.storageService.saveIndex(LS_ITEM_NAME.Index, this.selectedIndex);
 
     this.selectedMaterial = this.materials()[this.selectedIndex];
   }
 
   getStoredSelectedMaterial(): void {
-    const index = this.storageService.getSavedIndex();
+    const index = this.storageService.getIndex();
     if (typeof index === 'number') {
       this.selectedMaterial = this.materials()[index];
     }
@@ -99,14 +106,14 @@ export class DataService {
    */
   adjustIndexAndMaterial(delta: number): void {
     if (!this.selectedIndex) {
-      this.selectedIndex = this.storageService.getSavedIndex();
+      this.selectedIndex = this.storageService.getIndex();
     }
 
     const tempIndex = this.selectedIndex + delta;
     if (tempIndex < 0 || tempIndex >= this.materials().length) return;
 
     this.selectedIndex += delta;
-    this.storageService.saveIndexSelectedMaterial(LS_ITEM_NAME.Index, this.selectedIndex);
+    this.storageService.saveIndex(LS_ITEM_NAME.Index, this.selectedIndex);
     this.getStoredSelectedMaterial();
   }
 }

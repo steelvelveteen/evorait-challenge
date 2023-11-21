@@ -17,10 +17,10 @@ export class MaterialItemComponent implements AfterViewInit {
   private dataService = inject(DataService);
   private router = inject(Router);
 
-  @Input()
-  material!: Material;
-  @ViewChild('quantityInputRef') quantityInputRef: ElementRef | undefined;
   isBookBtnDisabled = false;
+
+  @Input() material!: Material;
+  @ViewChild('quantityInputRef') quantityInputRef: ElementRef | undefined;
 
   ngAfterViewInit(): void {
     this.quantityInputRef?.nativeElement.focus();
@@ -57,12 +57,13 @@ export class MaterialItemComponent implements AfterViewInit {
         }
       });
   }
+
   /**
    * Selects the material for displaying its details
    * @param materialItem the selected item from the list
    * @returns void
    */
-  selectMaterial(material: Material): void {
+  viewDetails(material: Material): void {
     this.dataService.selectMaterial(material);
     this.router.navigate(['details']);
   }

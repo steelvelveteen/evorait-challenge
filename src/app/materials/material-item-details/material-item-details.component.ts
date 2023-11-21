@@ -18,6 +18,7 @@ export class MaterialItemDetailsComponent implements OnInit, AfterViewInit {
   private router = inject(Router);
 
   material!: Material;
+
   @ViewChild('quantityInputRef') quantityInputRef: ElementRef | undefined;
   isBookBtnDisabled = false;
 

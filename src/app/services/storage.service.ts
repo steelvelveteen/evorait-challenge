@@ -15,11 +15,11 @@ export class StorageService {
     return of(JSON.parse(localStorage.getItem(itemName)!));
   }
 
-  saveIndexSelectedMaterial(itemName: string, index: number): void {
+  saveIndex(itemName: string, index: number): void {
     localStorage.setItem(itemName, JSON.stringify(index));
   }
 
-  getSavedIndex(): number {
+  getIndex(): number {
     const savedIndex = localStorage.getItem(LS_ITEM_NAME.Index);
     if (savedIndex) {
       const index = parseInt(savedIndex, 10);

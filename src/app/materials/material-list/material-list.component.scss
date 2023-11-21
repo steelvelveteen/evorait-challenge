@@ -1,16 +1,16 @@
 :host {
   display: flex;
   .material-list-container {
-    tbody {
-      display: flex;
-      flex-direction: column;
-    }
-
     th {
       text-align: left;
       padding: 0.2rem 0.75rem;
       margin: 0;
       min-width: 140px;
+    }
+
+    tbody {
+      display: flex;
+      flex-direction: column;
     }
 
     input {
