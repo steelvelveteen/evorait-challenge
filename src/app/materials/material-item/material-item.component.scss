@@ -19,6 +19,9 @@
 
   button {
     margin-left: 0.5rem;
+    &:disabled {
+      background-color: pink;
+    }
   }
 
   input {
