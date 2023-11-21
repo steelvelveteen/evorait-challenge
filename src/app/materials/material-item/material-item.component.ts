@@ -1,4 +1,12 @@
-import { AfterViewInit, Component, ElementRef, Input, ViewChild, inject } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  Input,
+  ViewChild,
+  inject,
+  signal,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DataService } from '../../services/data.service';
 import { Material } from '../../domain/material.interface';
@@ -17,7 +25,8 @@ export class MaterialItemComponent implements AfterViewInit {
   private dataService = inject(DataService);
   private router = inject(Router);
 
-  isBookBtnDisabled = false;
+  // isBookBtnDisabled = false;
+  isBookBtnDisabled = signal(false);
 
   @Input() material!: Material;
   @ViewChild('quantityInputRef') quantityInputRef: ElementRef | undefined;
@@ -38,7 +47,7 @@ export class MaterialItemComponent implements AfterViewInit {
           // Handle backspace explicitly
           // This block proudly provided by chatGPT
           if (event.inputType === 'deleteContentBackward' && isInputEmpty) {
-            this.isBookBtnDisabled = false;
+            this.isBookBtnDisabled.set(false);
             return inputValue;
           }
 
@@ -53,7 +62,7 @@ export class MaterialItemComponent implements AfterViewInit {
       .subscribe(quantity => {
         // Explicitly check if the input value is not empty
         if (quantity !== '') {
-          this.isBookBtnDisabled = !this.dataService.checkAvailability(quantity, this.material);
+          this.isBookBtnDisabled.set(!this.dataService.checkAvailability(quantity, this.material));
         }
       });
   }

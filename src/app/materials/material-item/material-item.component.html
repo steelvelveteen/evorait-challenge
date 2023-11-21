@@ -8,7 +8,7 @@
 <div class="book-quantity-container">
   <input #quantityInputRef matInput type="text" placeholder="Enter quantity" />
   <button
-    [disabled]="isBookBtnDisabled"
+    [disabled]="isBookBtnDisabled()"
     mat-raised-button
     color="primary"
     type="button"
@@ -17,7 +17,9 @@
   >
     Book
   </button>
-  <div *ngIf="isBookBtnDisabled" class="availability-error">
+  @if(isBookBtnDisabled()) {
+  <div class="availability-error">
     You are trying to book more than what's available. Max quantity {{ material.Available }}
   </div>
+  }
 </div>

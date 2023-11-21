@@ -1,4 +1,12 @@
-import { AfterViewInit, Component, ElementRef, OnInit, ViewChild, inject } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  OnInit,
+  ViewChild,
+  inject,
+  signal,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DataService } from '../../services/data.service';
 import { Router } from '@angular/router';
@@ -17,14 +25,14 @@ export class MaterialItemDetailsComponent implements OnInit, AfterViewInit {
   private dataService = inject(DataService);
   private router = inject(Router);
 
-  material!: Material;
+  material = signal<Material | undefined>(undefined);
 
   @ViewChild('quantityInputRef') quantityInputRef: ElementRef | undefined;
-  isBookBtnDisabled = false;
+  isBookBtnDisabled = signal(false);
 
   ngOnInit(): void {
     this.dataService.getStoredSelectedMaterial();
-    this.material = this.dataService.selectedMaterial;
+    this.material.set(this.dataService.selectedMaterial);
   }
 
   ngAfterViewInit(): void {
@@ -42,7 +50,7 @@ export class MaterialItemDetailsComponent implements OnInit, AfterViewInit {
 
           // Handle backspace explicitly
           if (event.inputType === 'deleteContentBackward' && isInputEmpty) {
-            this.isBookBtnDisabled = false;
+            this.isBookBtnDisabled.set(false);
             return inputValue;
           }
 
@@ -57,12 +65,14 @@ export class MaterialItemDetailsComponent implements OnInit, AfterViewInit {
       .subscribe(quantity => {
         // Explicitly check if the input value is not empty
         if (quantity !== '') {
-          this.isBookBtnDisabled = !this.dataService.checkAvailability(quantity, this.material);
+          this.isBookBtnDisabled.set(
+            !this.dataService.checkAvailability(quantity, this.material() as Material)
+          );
         }
       });
   }
 
-  bookMaterial(quantity: string, material: Material): void {
+  bookMaterial(quantity: string, material: Material | undefined): void {
     const isAvailable = this.dataService.checkAvailability(quantity, material as Material);
 
     // Book material
@@ -82,11 +92,11 @@ export class MaterialItemDetailsComponent implements OnInit, AfterViewInit {
 
   nextMaterial(): void {
     this.dataService.adjustIndexAndMaterial(1);
-    this.material = this.dataService.selectedMaterial;
+    this.material.set(this.dataService.selectedMaterial);
   }
 
   previousMaterial(): void {
     this.dataService.adjustIndexAndMaterial(-1);
-    this.material = this.dataService.selectedMaterial;
+    this.material.set(this.dataService.selectedMaterial);
   }
 }

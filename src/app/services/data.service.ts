@@ -47,29 +47,31 @@ export class DataService {
    * @param quantity number of items to book
    * @param material the material user wants to book
    */
-  bookMaterial(material: Material, quantity: string): void {
-    this.selectedIndex = this.materials().indexOf(material);
-    this.selectedMaterial = this.materials()[this.selectedIndex];
+  bookMaterial(material: Material | undefined, quantity: string): void {
+    if (material) {
+      this.selectedIndex = this.materials().indexOf(material);
+      this.selectedMaterial = this.materials()[this.selectedIndex];
 
-    if (this.selectedMaterial) {
-      // Update quantity
-      this.selectedMaterial.Quantity = (
-        parseInt(this.selectedMaterial.Quantity) + parseInt(quantity)
-      ).toString();
+      if (this.selectedMaterial) {
+        // Update quantity
+        this.selectedMaterial.Quantity = (
+          parseInt(this.selectedMaterial.Quantity) + parseInt(quantity)
+        ).toString();
 
-      // Update available
-      this.selectedMaterial.Available = (
-        parseInt(this.selectedMaterial.Available) - parseInt(quantity)
-      ).toString();
+        // Update available
+        this.selectedMaterial.Available = (
+          parseInt(this.selectedMaterial.Available) - parseInt(quantity)
+        ).toString();
+      }
+
+      // Updates materials list
+      this.materialsList.update(() => [...this.materials(), material as Material]);
+      this.storageService.save(LS_ITEM_NAME.MaterialsList, this.materials());
     }
-
-    // Updates materials list
-    this.materialsList.update(() => [...this.materials(), material]);
-    this.storageService.save(LS_ITEM_NAME.MaterialsList, this.materials());
   }
 
   /**
-   * Gets the selected material by index for details vieww
+   * Gets the selected material by index for details view
    * Saves the index locally and in local storage
    * @param material the material selected
    */
