@@ -10,16 +10,16 @@ import {
 import { CommonModule } from '@angular/common';
 import { DataService } from '../../services/data.service';
 import { Router } from '@angular/router';
-import { MaterialModule } from '../../material.module';
 import { Material } from '../../domain/material.interface';
 import { fromEvent, map } from 'rxjs';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-material-item-details',
   standalone: true,
   templateUrl: './material-item-details.component.html',
   styleUrl: './material-item-details.component.scss',
-  imports: [CommonModule, MaterialModule],
+  imports: [CommonModule, MatButtonModule],
 })
 export class MaterialItemDetailsComponent implements OnInit, AfterViewInit {
   private dataService = inject(DataService);

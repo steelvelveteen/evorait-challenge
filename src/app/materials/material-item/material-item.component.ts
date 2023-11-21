@@ -11,13 +11,13 @@ import { CommonModule } from '@angular/common';
 import { DataService } from '../../services/data.service';
 import { Material } from '../../domain/material.interface';
 import { Router } from '@angular/router';
-import { MaterialModule } from '../../material.module';
 import { fromEvent, map } from 'rxjs';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-material-item',
   standalone: true,
-  imports: [CommonModule, MaterialModule],
+  imports: [CommonModule, MatButtonModule],
   templateUrl: './material-item.component.html',
   styleUrl: './material-item.component.scss',
 })
