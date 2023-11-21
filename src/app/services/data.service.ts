@@ -1,6 +1,6 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable, inject, signal } from '@angular/core';
-import { Observable, map, mergeMap, of, tap } from 'rxjs';
+import { Observable, catchError, map, mergeMap, of, tap } from 'rxjs';
 import { DataSet, Material } from '../domain/material.interface';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { StorageService } from './storage.service';
@@ -14,11 +14,13 @@ const JSONUrl = '/assets/MatPricingSet.json';
 export class DataService {
   private http = inject(HttpClient);
   private storageService = inject(StorageService);
+  error = signal('');
 
   private getMaterialsList$: Observable<Material[]> = this.storageService
     .get(LS_ITEM_NAME.MaterialsList)
     .pipe(
       mergeMap(localStorageData => {
+        // throw new Error('Failed to retrieve materials list');
         if (localStorageData) {
           // If there is data in local storage, return it
           return of(localStorageData);
@@ -32,6 +34,10 @@ export class DataService {
             )
           );
         }
+      }),
+      catchError(error => {
+        this.error.set(error.message);
+        return of(error);
       })
     );
 

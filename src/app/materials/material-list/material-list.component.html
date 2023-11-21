@@ -1,3 +1,6 @@
+@if(error()) {
+<div class="error-message">{{ error() }}</div>
+} @else {
 <div class="material-list-container">
   <div>
     <input matInput #filterInputRef type="text" placeholder="Search by Description" />
@@ -14,3 +17,5 @@
     }
   </tbody>
 </div>
+
+}

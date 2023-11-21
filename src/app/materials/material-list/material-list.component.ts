@@ -16,6 +16,8 @@ export class MaterialListComponent implements AfterViewInit {
 
   materials = this.dataService.materials;
   filteredMaterials = this.dataService.materials;
+  error = this.dataService.error;
+  materialsList = this.dataService.materialsList;
 
   @ViewChild('filterInputRef') filterInputRef: ElementRef | undefined;
   @ViewChild('quantityInputRef') quantityInputRef: ElementRef | undefined;
