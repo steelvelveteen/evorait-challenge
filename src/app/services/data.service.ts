@@ -40,7 +40,7 @@ export class DataService {
   });
   materialsList = signal(this.materials());
   selectedMaterial!: Material;
-  selectedIndex!: number;
+  selectedIndex = signal(0);
 
   /**
    * Books material and updates list information
@@ -49,8 +49,8 @@ export class DataService {
    */
   bookMaterial(material: Material | undefined, quantity: string): void {
     if (material) {
-      this.selectedIndex = this.materials().indexOf(material);
-      this.selectedMaterial = this.materials()[this.selectedIndex];
+      this.selectedIndex.set(this.materials().indexOf(material));
+      this.selectedMaterial = this.materials()[this.selectedIndex()];
 
       if (this.selectedMaterial) {
         // Update quantity
@@ -71,15 +71,15 @@ export class DataService {
   }
 
   /**
-   * Gets the selected material by index for details view
+   * Gets the selected material by index for details vieww
    * Saves the index locally and in local storage
    * @param material the material selected
    */
   selectMaterial(material: Material): void {
-    this.selectedIndex = this.materials().indexOf(material);
-    this.storageService.saveIndex(LS_ITEM_NAME.Index, this.selectedIndex);
+    this.selectedIndex.set(this.materials().indexOf(material));
+    this.storageService.saveIndex(LS_ITEM_NAME.Index, this.selectedIndex());
 
-    this.selectedMaterial = this.materials()[this.selectedIndex];
+    this.selectedMaterial = this.materials()[this.selectedIndex()];
   }
 
   getStoredSelectedMaterial(): void {
@@ -107,15 +107,15 @@ export class DataService {
    * @returns void
    */
   adjustIndexAndMaterial(delta: number): void {
-    if (!this.selectedIndex) {
-      this.selectedIndex = this.storageService.getIndex();
+    if (!this.selectedIndex()) {
+      this.selectedIndex.set(this.storageService.getIndex());
     }
 
-    const tempIndex = this.selectedIndex + delta;
+    const tempIndex = this.selectedIndex() + delta;
     if (tempIndex < 0 || tempIndex >= this.materials().length) return;
 
-    this.selectedIndex += delta;
-    this.storageService.saveIndex(LS_ITEM_NAME.Index, this.selectedIndex);
+    this.selectedIndex.set(this.selectedIndex() + delta);
+    this.storageService.saveIndex(LS_ITEM_NAME.Index, this.selectedIndex());
     this.getStoredSelectedMaterial();
   }
 }
