@@ -26,9 +26,9 @@ export class MaterialItemDetailsComponent implements OnInit, AfterViewInit {
   private router = inject(Router);
 
   material = signal<Material | undefined>(undefined);
+  isBookBtnDisabled = signal(false);
 
   @ViewChild('quantityInputRef') quantityInputRef: ElementRef | undefined;
-  isBookBtnDisabled = signal(false);
 
   ngOnInit(): void {
     this.dataService.getStoredSelectedMaterial();
@@ -40,9 +40,9 @@ export class MaterialItemDetailsComponent implements OnInit, AfterViewInit {
 
     // Listens for quantity inputs for availablity
     // Disables button and displays error message
-    fromEvent(this.quantityInputRef?.nativeElement, 'input')
+    fromEvent<InputEvent>(this.quantityInputRef?.nativeElement, 'input')
       .pipe(
-        map((event: any) => {
+        map((event: InputEvent) => {
           const inputValue = (event.target as HTMLInputElement).value.trim();
 
           // Check if the input value is empty

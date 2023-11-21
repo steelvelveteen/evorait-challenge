@@ -25,7 +25,6 @@ export class MaterialItemComponent implements AfterViewInit {
   private dataService = inject(DataService);
   private router = inject(Router);
 
-  // isBookBtnDisabled = false;
   isBookBtnDisabled = signal(false);
 
   @Input() material!: Material;
@@ -36,9 +35,9 @@ export class MaterialItemComponent implements AfterViewInit {
 
     // Listens for quantity inputs for availablity
     // Disables button and displays error message
-    fromEvent(this.quantityInputRef?.nativeElement, 'input')
+    fromEvent<InputEvent>(this.quantityInputRef?.nativeElement, 'input')
       .pipe(
-        map((event: any) => {
+        map((event: InputEvent) => {
           const inputValue = (event.target as HTMLInputElement).value.trim();
 
           // Check if the input value is empty
