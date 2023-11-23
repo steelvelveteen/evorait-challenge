@@ -31,8 +31,6 @@ export class MaterialItemComponent implements AfterViewInit {
   @ViewChild('quantityInputRef') quantityInputRef: ElementRef | undefined;
 
   ngAfterViewInit(): void {
-    this.quantityInputRef?.nativeElement.focus();
-
     // Listens for quantity inputs for availablity
     // Disables button and displays error message
     fromEvent<InputEvent>(this.quantityInputRef?.nativeElement, 'input')
